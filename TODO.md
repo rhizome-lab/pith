@@ -3,7 +3,7 @@
 ## Roadmap
 
 1. [x] Diverge from WASI where ergonomics warrant
-2. [ ] Add more interfaces (crypto, encoding, sql, etc.)
+2. [x] Add more interfaces (crypto, encoding, sql)
 3. [x] Reference implementations for native targets
 4. [ ] `spore-pith` - Lua bindings for Spore
 
