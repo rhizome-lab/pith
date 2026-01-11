@@ -1,0 +1,10 @@
+[package]
+name = "pith-cli-native"
+description = "Native implementation of pith-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+pith-cli = { path = "../../../interfaces/pith-cli" }

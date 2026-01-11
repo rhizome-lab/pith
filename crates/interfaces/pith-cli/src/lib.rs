@@ -18,25 +18,31 @@ pub trait Environment {
 }
 
 /// Standard input stream.
+///
+/// Uses `&mut self` to match `std::io::Read`. See ADR-0003.
 pub trait Stdin {
     /// Read bytes from stdin.
-    fn read(&self, buf: &mut [u8]) -> std::io::Result<usize>;
+    fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize>;
 }
 
 /// Standard output stream.
+///
+/// Uses `&mut self` to match `std::io::Write`. See ADR-0003.
 pub trait Stdout {
     /// Write bytes to stdout.
-    fn write(&self, buf: &[u8]) -> std::io::Result<usize>;
+    fn write(&mut self, buf: &[u8]) -> std::io::Result<usize>;
 
     /// Flush stdout.
-    fn flush(&self) -> std::io::Result<()>;
+    fn flush(&mut self) -> std::io::Result<()>;
 }
 
 /// Standard error stream.
+///
+/// Uses `&mut self` to match `std::io::Write`. See ADR-0003.
 pub trait Stderr {
     /// Write bytes to stderr.
-    fn write(&self, buf: &[u8]) -> std::io::Result<usize>;
+    fn write(&mut self, buf: &[u8]) -> std::io::Result<usize>;
 
     /// Flush stderr.
-    fn flush(&self) -> std::io::Result<()>;
+    fn flush(&mut self) -> std::io::Result<()>;
 }
