@@ -1,0 +1,11 @@
+[package]
+name = "pith-keyvalue-native"
+description = "Native key-value store implementation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+pith-keyvalue = { path = "../../../interfaces/pith-keyvalue" }
+tokio.workspace = true

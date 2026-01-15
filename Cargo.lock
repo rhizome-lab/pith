@@ -1842,6 +1842,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "pith-keyvalue"
+version = "0.1.0"
+dependencies = [
+ "thiserror 2.0.17",
+]
+
+[[package]]
+name = "pith-keyvalue-native"
+version = "0.1.0"
+dependencies = [
+ "pith-keyvalue",
+ "tokio",
+]
+
+[[package]]
 name = "pith-logging"
 version = "0.1.0"
 
