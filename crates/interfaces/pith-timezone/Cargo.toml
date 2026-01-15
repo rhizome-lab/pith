@@ -1,0 +1,11 @@
+[package]
+name = "pith-timezone"
+description = "Timezone handling"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+jiff = "0.2"
+thiserror.workspace = true
