@@ -12,6 +12,29 @@
 6. [x] Protocol implementations (`crates/protocols/`)
    - [x] pith-http1 (HTTP/1.1 wire format parsing/serialization)
 
+## Backlog
+
+WASI Phase 1/2 interfaces to consider:
+
+- [ ] **pith-timezone** - timezone handling (WASI Phase 2)
+- [ ] **pith-keyvalue** - key-value store (WASI Phase 1)
+- [ ] **pith-logging** - structured logging (WASI Phase 1)
+- [ ] **pith-config** - runtime configuration (WASI Phase 1)
+- [ ] **pith-url** - URL parsing (WASI Phase 1)
+- [ ] **pith-messaging** - message queues (WASI Phase 1)
+- [ ] **pith-observe** - observability/telemetry (WASI Phase 1)
+- [ ] **pith-blobstore** - blob storage (WASI Phase 1)
+
+### Unstable / Deferred
+
+APIs likely to change or too platform-specific:
+
+- **pith-nn** - neural network inference (WASI Phase 2, ML APIs evolving fast)
+- **pith-gfx** - graphics (WASI Phase 2, graphics APIs notoriously unstable)
+- **pith-threads** - threading (WASI Phase 1, complex semantics)
+- **pith-i2c / pith-spi / pith-usb** - hardware interfaces (niche, platform-specific)
+- **pith-distributed-lock** - distributed locking (niche)
+
 ## Future Considerations
 
 - **`spore-pith`**: Lua bindings (belongs in Spore, not here)
