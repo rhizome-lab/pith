@@ -4,6 +4,8 @@
 
 use std::path::Path;
 
+pub use pith_io::{InputStream, OutputStream, StreamError};
+
 /// Filesystem error types.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -45,13 +47,13 @@ pub struct Metadata {
 /// A capability to access a directory and its contents.
 pub trait Directory {
     /// Open a file for reading.
-    fn open_read(&self, path: &Path) -> Result<impl Read, Error>;
+    fn open_read(&self, path: &Path) -> Result<impl InputStream, Error>;
 
     /// Open a file for writing (creates if not exists, truncates if exists).
-    fn open_write(&self, path: &Path) -> Result<impl Write, Error>;
+    fn open_write(&self, path: &Path) -> Result<impl OutputStream, Error>;
 
     /// Open a file for appending.
-    fn open_append(&self, path: &Path) -> Result<impl Write, Error>;
+    fn open_append(&self, path: &Path) -> Result<impl OutputStream, Error>;
 
     /// Get metadata for a path.
     fn metadata(&self, path: &Path) -> Result<Metadata, Error>;
@@ -77,15 +79,4 @@ pub trait Directory {
 pub struct DirEntry {
     pub name: String,
     pub file_type: FileType,
-}
-
-/// Read trait for files.
-pub trait Read {
-    fn read(&mut self, buf: &mut [u8]) -> Result<usize, Error>;
-}
-
-/// Write trait for files.
-pub trait Write {
-    fn write(&mut self, buf: &[u8]) -> Result<usize, Error>;
-    fn flush(&mut self) -> Result<(), Error>;
 }

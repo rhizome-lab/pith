@@ -1,0 +1,13 @@
+[package]
+name = "pith-websocket-native"
+description = "Native WebSocket implementation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+pith-websocket = { path = "../../../interfaces/pith-websocket" }
+tokio-tungstenite = "0.26"
+tokio.workspace = true
+futures-util = "0.3"

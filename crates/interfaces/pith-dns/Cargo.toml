@@ -1,11 +1,10 @@
 [package]
-name = "pith-filesystem"
-description = "Filesystem interfaces"
+name = "pith-dns"
+description = "DNS interfaces"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-io = { path = "../pith-io" }
 thiserror.workspace = true

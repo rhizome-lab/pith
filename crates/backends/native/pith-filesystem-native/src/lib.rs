@@ -1,8 +1,8 @@
 //! Native implementation of pith-filesystem.
 
-use pith_filesystem::{DirEntry, Directory, Error, FileType, Metadata, Read, Write};
+use pith_filesystem::{DirEntry, Directory, Error, FileType, Metadata};
+use pith_io_native::{ReaderStream, WriterStream};
 use std::fs::{self, File, OpenOptions};
-use std::io::{Read as IoRead, Write as IoWrite};
 use std::path::{Path, PathBuf};
 
 /// A capability to access a native directory.
@@ -29,30 +29,30 @@ impl NativeDir {
 }
 
 impl Directory for NativeDir {
-    fn open_read(&self, path: &Path) -> Result<impl Read, Error> {
+    fn open_read(&self, path: &Path) -> Result<impl pith_filesystem::InputStream, Error> {
         let full_path = self.resolve(path);
         let file = File::open(&full_path)?;
-        Ok(NativeFile(file))
+        Ok(ReaderStream::new(file))
     }
 
-    fn open_write(&self, path: &Path) -> Result<impl Write, Error> {
+    fn open_write(&self, path: &Path) -> Result<impl pith_filesystem::OutputStream, Error> {
         let full_path = self.resolve(path);
         let file = OpenOptions::new()
             .write(true)
             .create(true)
             .truncate(true)
             .open(&full_path)?;
-        Ok(NativeFile(file))
+        Ok(WriterStream::new(file))
     }
 
-    fn open_append(&self, path: &Path) -> Result<impl Write, Error> {
+    fn open_append(&self, path: &Path) -> Result<impl pith_filesystem::OutputStream, Error> {
         let full_path = self.resolve(path);
         let file = OpenOptions::new()
             .write(true)
             .create(true)
             .append(true)
             .open(&full_path)?;
-        Ok(NativeFile(file))
+        Ok(WriterStream::new(file))
     }
 
     fn metadata(&self, path: &Path) -> Result<Metadata, Error> {
@@ -139,31 +139,14 @@ impl Directory for NativeDir {
     }
 }
 
-/// A native file handle.
-pub struct NativeFile(File);
-
-impl Read for NativeFile {
-    fn read(&mut self, buf: &mut [u8]) -> Result<usize, Error> {
-        Ok(self.0.read(buf)?)
-    }
-}
-
-impl Write for NativeFile {
-    fn write(&mut self, buf: &[u8]) -> Result<usize, Error> {
-        Ok(self.0.write(buf)?)
-    }
-
-    fn flush(&mut self) -> Result<(), Error> {
-        Ok(self.0.flush()?)
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn create_and_read_file() {
+        use pith_filesystem::{InputStream, OutputStream};
+
         let temp_dir = std::env::temp_dir().join("pith-fs-test-1");
         let _ = fs::remove_dir_all(&temp_dir);
         fs::create_dir_all(&temp_dir).unwrap();
@@ -180,9 +163,7 @@ mod tests {
         // Read it back
         {
             let mut file = dir.open_read(Path::new("test.txt")).unwrap();
-            let mut buf = [0u8; 5];
-            let n = file.read(&mut buf).unwrap();
-            assert_eq!(n, 5);
+            let buf = file.read(5).unwrap();
             assert_eq!(&buf, b"hello");
         }
 

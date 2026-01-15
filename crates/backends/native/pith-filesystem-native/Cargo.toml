@@ -8,3 +8,4 @@ repository.workspace = true
 
 [dependencies]
 pith-filesystem = { path = "../../../interfaces/pith-filesystem" }
+pith-io-native = { path = "../pith-io-native" }

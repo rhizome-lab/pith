@@ -1,27 +1,34 @@
 [workspace]
 resolver = "2"
 members = [
+    # Interfaces
     "crates/interfaces/pith-clocks",
     "crates/interfaces/pith-cli",
+    "crates/interfaces/pith-crypto",
+    "crates/interfaces/pith-dns",
+    "crates/interfaces/pith-encoding",
     "crates/interfaces/pith-filesystem",
     "crates/interfaces/pith-http",
     "crates/interfaces/pith-io",
     "crates/interfaces/pith-random",
     "crates/interfaces/pith-sockets",
-    "crates/interfaces/pith-crypto",
-    "crates/interfaces/pith-encoding",
     "crates/interfaces/pith-sql",
+    "crates/interfaces/pith-websocket",
     # Backends
-    "crates/backends/native/pith-random-native",
     "crates/backends/native/pith-clocks-native",
     "crates/backends/native/pith-cli-native",
-    "crates/backends/native/pith-io-native",
-    "crates/backends/native/pith-filesystem-native",
-    "crates/backends/native/pith-sockets-native",
-    "crates/backends/native/pith-http-native",
     "crates/backends/native/pith-crypto-native",
+    "crates/backends/native/pith-dns-native",
     "crates/backends/native/pith-encoding-native",
+    "crates/backends/native/pith-filesystem-native",
+    "crates/backends/native/pith-http-native",
+    "crates/backends/native/pith-io-native",
+    "crates/backends/native/pith-random-native",
+    "crates/backends/native/pith-sockets-native",
     "crates/backends/native/pith-sql-native",
+    "crates/backends/native/pith-websocket-native",
+    # Protocols
+    "crates/protocols/pith-http1",
 ]
 
 [workspace.package]

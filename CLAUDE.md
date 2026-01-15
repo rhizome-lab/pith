@@ -6,28 +6,42 @@ Pith is a standard library of interfaces, inspired by WASI.
 
 ```
 crates/
-├── interfaces/     # Trait definitions (pith-*)
-└── backends/       # Implementations
+├── interfaces/     # Trait definitions (what you can do)
+├── protocols/      # Wire format implementations (how it's encoded)
+└── backends/       # Platform implementations (how it runs)
     ├── native/     # Native OS implementations
     └── wasm/       # WASM implementations
 ```
 
-### Interfaces
+### Interfaces (`interfaces/`)
 
-Each crate in `interfaces/` defines traits for a capability domain:
-- `pith-clocks` - time
-- `pith-cli` - command-line environment
-- `pith-filesystem` - file I/O
-- `pith-http` - HTTP
-- `pith-io` - streams and polling
-- `pith-random` - randomness
-- `pith-sockets` - networking
+**What:** Traits defining capabilities. No implementations, just contracts.
 
-### Backends
+**Examples:**
+- `pith-http` → `HttpClient`, `HttpHandler` traits
+- `pith-websocket` → `WebSocketClient`, `WebSocketServer` traits
+- `pith-dns` → `Resolver` trait
 
-Implementations go in `backends/<target>/`. For example:
-- `backends/native/pith-clocks-native` - native clock implementation
-- `backends/wasm/pith-clocks-wasm` - WASM clock implementation
+**Rule:** If it's "what can I do?" (client, server, read, write), it's an interface.
+
+### Protocols (`protocols/`)
+
+**What:** Wire format parsing/serialization. Pure Rust, no platform deps.
+
+**Examples:**
+- `pith-http1` → HTTP/1.1 request/response parsing
+
+**Rule:** If it's "how is data encoded on the wire?", it's a protocol. These are shared across backends - both native and wasm can use the same HTTP parser.
+
+### Backends (`backends/<target>/`)
+
+**What:** Platform-specific implementations of interface traits. Wraps libraries.
+
+**Examples:**
+- `pith-websocket-native` → implements `WebSocketClient` using tungstenite
+- `pith-dns-native` → implements `Resolver` using hickory-resolver
+
+**Rule:** If it wraps a library or uses platform APIs, it's a backend.
 
 ## Behavioral Patterns
 
@@ -45,3 +59,4 @@ From ecosystem-wide session analysis:
 - Capability-based (no global/ambient access)
 - Async-first where blocking is possible
 - Mirror WASI structure but diverge for ergonomics where sensible
+- Prefer portability over power: simpler interfaces that work everywhere beat feature-rich ones that only work on some platforms
