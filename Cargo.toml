@@ -13,6 +13,7 @@ members = [
     "crates/interfaces/pith-random",
     "crates/interfaces/pith-sockets",
     "crates/interfaces/pith-sql",
+    "crates/interfaces/pith-url",
     "crates/interfaces/pith-websocket",
     # Backends
     "crates/backends/native/pith-clocks-native",

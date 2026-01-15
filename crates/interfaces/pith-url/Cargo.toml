@@ -1,0 +1,11 @@
+[package]
+name = "pith-url"
+description = "URL parsing and manipulation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+url = "2"
+thiserror.workspace = true
