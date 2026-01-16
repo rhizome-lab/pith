@@ -1729,6 +1729,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "pith-cache"
+version = "0.1.0"
+
+[[package]]
+name = "pith-cache-native"
+version = "0.1.0"
+dependencies = [
+ "pith-cache",
+]
+
+[[package]]
 name = "pith-cli"
 version = "0.1.0"
 

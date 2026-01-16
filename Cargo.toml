@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     # Interfaces
     "crates/interfaces/pith-blobstore",
+    "crates/interfaces/pith-cache",
     "crates/interfaces/pith-clocks",
     "crates/interfaces/pith-cli",
     "crates/interfaces/pith-config",
@@ -28,6 +29,7 @@ members = [
     "crates/interfaces/pith-websocket",
     # Backends
     "crates/backends/native/pith-blobstore-native",
+    "crates/backends/native/pith-cache-native",
     "crates/backends/native/pith-clocks-native",
     "crates/backends/native/pith-cli-native",
     "crates/backends/native/pith-config-native",

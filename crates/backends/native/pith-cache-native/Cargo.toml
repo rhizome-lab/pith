@@ -1,0 +1,10 @@
+[package]
+name = "pith-cache-native"
+description = "Native in-memory cache implementation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+pith-cache = { path = "../../../interfaces/pith-cache" }
