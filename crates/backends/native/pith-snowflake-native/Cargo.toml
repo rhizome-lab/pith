@@ -1,0 +1,10 @@
+[package]
+name = "pith-snowflake-native"
+description = "Native snowflake ID implementation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+pith-snowflake = { path = "../../../interfaces/pith-snowflake" }

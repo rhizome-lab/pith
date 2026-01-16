@@ -1922,6 +1922,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "pith-snowflake"
+version = "0.1.0"
+
+[[package]]
+name = "pith-snowflake-native"
+version = "0.1.0"
+dependencies = [
+ "pith-snowflake",
+]
+
+[[package]]
 name = "pith-sockets"
 version = "0.1.0"
 
