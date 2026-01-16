@@ -1,5 +1,5 @@
 [package]
-name = "pith-sockets-native"
+name = "rhizome-pith-sockets-native"
 description = "Native implementation of pith-sockets"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-sockets = { path = "../../../interfaces/pith-sockets" }
+rhizome-pith-sockets = { path = "../../../interfaces/pith-sockets" }
 tokio = { workspace = true, features = ["net"] }

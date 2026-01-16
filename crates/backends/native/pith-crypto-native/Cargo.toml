@@ -1,5 +1,5 @@
 [package]
-name = "pith-crypto-native"
+name = "rhizome-pith-crypto-native"
 description = "Native implementation of pith-crypto"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-crypto = { path = "../../../interfaces/pith-crypto" }
+rhizome-pith-crypto = { path = "../../../interfaces/pith-crypto" }
 sha2 = "0.10"
 hmac = "0.12"
 aes-gcm = "0.10"

@@ -1,5 +1,5 @@
 [package]
-name = "pith-dns-native"
+name = "rhizome-pith-dns-native"
 description = "Native DNS implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,6 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-dns = { path = "../../../interfaces/pith-dns" }
+rhizome-pith-dns = { path = "../../../interfaces/pith-dns" }
 hickory-resolver = "0.25"
 tokio.workspace = true

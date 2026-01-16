@@ -1,5 +1,5 @@
 [package]
-name = "pith-nanoid"
+name = "rhizome-pith-nanoid"
 description = "Nanoid interfaces"
 version.workspace = true
 edition.workspace = true

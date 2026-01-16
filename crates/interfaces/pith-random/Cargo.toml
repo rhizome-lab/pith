@@ -1,5 +1,5 @@
 [package]
-name = "pith-random"
+name = "rhizome-pith-random"
 description = "Random number generation interfaces"
 version.workspace = true
 edition.workspace = true

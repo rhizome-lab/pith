@@ -1,5 +1,5 @@
 [package]
-name = "pith-observe"
+name = "rhizome-pith-observe"
 description = "Observability/telemetry interfaces"
 version.workspace = true
 edition.workspace = true

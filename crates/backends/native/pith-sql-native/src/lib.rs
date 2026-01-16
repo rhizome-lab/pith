@@ -1,6 +1,6 @@
 //! Native implementation of pith-sql using libsql.
 
-use pith_sql::{Connection, Database, Error, Row, Value};
+use rhizome_pith_sql::{Connection, Database, Error, Row, Value};
 
 /// libsql database.
 pub struct LibsqlDatabase;

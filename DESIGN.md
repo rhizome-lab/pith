@@ -14,11 +14,11 @@ Pith's value varies by domain. The goal is **reducing decision fatigue** while p
 
 Fundamental capabilities where abstraction enables portability and testability:
 
-- `pith-clocks` - time
-- `pith-random` - randomness
-- `pith-filesystem` - file I/O
-- `pith-io` - streams
-- `pith-sockets` - raw networking
+- `rhizome-pith-clocks` - time
+- `rhizome-pith-random` - randomness
+- `rhizome-pith-filesystem` - file I/O
+- `rhizome-pith-io` - streams
+- `rhizome-pith-sockets` - raw networking
 
 These have genuinely different implementations across platforms (native, WASM, embedded). The abstraction is the value.
 

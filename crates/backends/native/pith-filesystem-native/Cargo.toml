@@ -1,5 +1,5 @@
 [package]
-name = "pith-filesystem-native"
+name = "rhizome-pith-filesystem-native"
 description = "Native implementation of pith-filesystem"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-filesystem = { path = "../../../interfaces/pith-filesystem" }
-pith-io-native = { path = "../pith-io-native" }
+rhizome-pith-filesystem = { path = "../../../interfaces/pith-filesystem" }
+rhizome-pith-io-native = { path = "../pith-io-native" }

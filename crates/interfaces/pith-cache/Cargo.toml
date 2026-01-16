@@ -1,5 +1,5 @@
 [package]
-name = "pith-cache"
+name = "rhizome-pith-cache"
 description = "Cache interfaces"
 version.workspace = true
 edition.workspace = true

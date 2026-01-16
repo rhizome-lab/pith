@@ -1,6 +1,6 @@
 //! Native snowflake ID implementation.
 
-use pith_snowflake::{Snowflake, SnowflakeError, SnowflakeId};
+use rhizome_pith_snowflake::{Snowflake, SnowflakeError, SnowflakeId};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 

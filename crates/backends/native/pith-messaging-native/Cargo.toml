@@ -1,5 +1,5 @@
 [package]
-name = "pith-messaging-native"
+name = "rhizome-pith-messaging-native"
 description = "Native message queue implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-messaging = { path = "../../../interfaces/pith-messaging" }
+rhizome-pith-messaging = { path = "../../../interfaces/pith-messaging" }
 tokio = { workspace = true, features = ["sync", "time"] }
 
 [dev-dependencies]

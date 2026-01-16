@@ -1,7 +1,7 @@
 //! Native WebSocket implementation using tungstenite.
 
 use futures_util::{SinkExt, StreamExt};
-use pith_websocket::{Error, Message, WebSocketClient, WebSocketConnector};
+use rhizome_pith_websocket::{Error, Message, WebSocketClient, WebSocketConnector};
 use tokio::net::TcpStream;
 use tokio_tungstenite::{
     connect_async, tungstenite::protocol::Message as TungMessage, MaybeTlsStream, WebSocketStream,

@@ -1,5 +1,5 @@
 [package]
-name = "pith-observe-native"
+name = "rhizome-pith-observe-native"
 description = "Native observability implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-observe = { path = "../../../interfaces/pith-observe" }
+rhizome-pith-observe = { path = "../../../interfaces/pith-observe" }

@@ -1,6 +1,6 @@
 //! Native blob storage implementation.
 
-use pith_blobstore::{BlobStore, Container, Error, ObjectMeta};
+use rhizome_pith_blobstore::{BlobStore, Container, Error, ObjectMeta};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 

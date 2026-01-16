@@ -1,5 +1,5 @@
 [package]
-name = "pith-encoding-native"
+name = "rhizome-pith-encoding-native"
 description = "Native implementation of pith-encoding"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-encoding = { path = "../../../interfaces/pith-encoding" }
+rhizome-pith-encoding = { path = "../../../interfaces/pith-encoding" }
 base64 = "0.22"

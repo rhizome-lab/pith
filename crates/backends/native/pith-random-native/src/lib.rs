@@ -1,6 +1,6 @@
 //! Native implementation of pith-random.
 
-use pith_random::{InsecureRandom, SecureRandom};
+use rhizome_pith_random::{InsecureRandom, SecureRandom};
 
 /// Cryptographically secure random using OS entropy.
 #[derive(Debug, Default, Clone, Copy)]

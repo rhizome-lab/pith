@@ -1,5 +1,5 @@
 [package]
-name = "pith-markdown"
+name = "rhizome-pith-markdown"
 description = "Markdown interfaces"
 version.workspace = true
 edition.workspace = true

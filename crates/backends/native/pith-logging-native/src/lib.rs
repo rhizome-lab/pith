@@ -1,6 +1,6 @@
 //! Native logging implementation using tracing.
 
-use pith_logging::{Level, Logger, Record};
+use rhizome_pith_logging::{Level, Logger, Record};
 
 /// Initialize the default tracing subscriber.
 pub fn init() {

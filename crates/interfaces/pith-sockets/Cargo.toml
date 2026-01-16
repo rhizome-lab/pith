@@ -1,5 +1,5 @@
 [package]
-name = "pith-sockets"
+name = "rhizome-pith-sockets"
 description = "Socket interfaces (TCP, UDP)"
 version.workspace = true
 edition.workspace = true

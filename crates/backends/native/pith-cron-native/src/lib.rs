@@ -1,6 +1,6 @@
 //! Native cron expression implementation.
 
-use pith_cron::{CronError, CronExpr, CronParser, CronSchedule};
+use rhizome_pith_cron::{CronError, CronExpr, CronParser, CronSchedule};
 use std::fmt;
 
 /// A parsed cron expression.

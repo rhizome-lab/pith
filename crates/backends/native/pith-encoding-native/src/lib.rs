@@ -1,6 +1,6 @@
 //! Native implementation of pith-encoding.
 
-use pith_encoding::{Base64, Base64Url, DecodeError, Hex, UrlEncoding};
+use rhizome_pith_encoding::{Base64, Base64Url, DecodeError, Hex, UrlEncoding};
 
 /// Standard Base64 encoding.
 pub struct StdBase64;

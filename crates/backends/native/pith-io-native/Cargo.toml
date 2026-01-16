@@ -1,5 +1,5 @@
 [package]
-name = "pith-io-native"
+name = "rhizome-pith-io-native"
 description = "Native implementation of pith-io"
 version.workspace = true
 edition.workspace = true
@@ -11,5 +11,5 @@ default = ["tokio"]
 tokio = ["dep:tokio"]
 
 [dependencies]
-pith-io = { path = "../../../interfaces/pith-io" }
+rhizome-pith-io = { path = "../../../interfaces/pith-io" }
 tokio = { workspace = true, features = ["io-util"], optional = true }

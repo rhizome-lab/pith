@@ -1,5 +1,5 @@
 [package]
-name = "pith-random-native"
+name = "rhizome-pith-random-native"
 description = "Native implementation of pith-random"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-random = { path = "../../../interfaces/pith-random" }
+rhizome-pith-random = { path = "../../../interfaces/pith-random" }
 getrandom.workspace = true

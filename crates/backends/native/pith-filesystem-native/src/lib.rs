@@ -1,7 +1,7 @@
 //! Native implementation of pith-filesystem.
 
-use pith_filesystem::{DirEntry, Directory, Error, FileType, Metadata};
-use pith_io_native::{ReaderStream, WriterStream};
+use rhizome_pith_filesystem::{DirEntry, Directory, Error, FileType, Metadata};
+use rhizome_pith_io_native::{ReaderStream, WriterStream};
 use std::fs::{self, File, OpenOptions};
 use std::path::{Path, PathBuf};
 
@@ -29,13 +29,13 @@ impl NativeDir {
 }
 
 impl Directory for NativeDir {
-    fn open_read(&self, path: &Path) -> Result<impl pith_filesystem::InputStream, Error> {
+    fn open_read(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::InputStream, Error> {
         let full_path = self.resolve(path);
         let file = File::open(&full_path)?;
         Ok(ReaderStream::new(file))
     }
 
-    fn open_write(&self, path: &Path) -> Result<impl pith_filesystem::OutputStream, Error> {
+    fn open_write(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::OutputStream, Error> {
         let full_path = self.resolve(path);
         let file = OpenOptions::new()
             .write(true)
@@ -45,7 +45,7 @@ impl Directory for NativeDir {
         Ok(WriterStream::new(file))
     }
 
-    fn open_append(&self, path: &Path) -> Result<impl pith_filesystem::OutputStream, Error> {
+    fn open_append(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::OutputStream, Error> {
         let full_path = self.resolve(path);
         let file = OpenOptions::new()
             .write(true)
@@ -145,7 +145,7 @@ mod tests {
 
     #[test]
     fn create_and_read_file() {
-        use pith_filesystem::{InputStream, OutputStream};
+        use rhizome_pith_filesystem::{InputStream, OutputStream};
 
         let temp_dir = std::env::temp_dir().join("pith-fs-test-1");
         let _ = fs::remove_dir_all(&temp_dir);

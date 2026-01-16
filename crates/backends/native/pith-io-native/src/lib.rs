@@ -1,6 +1,6 @@
 //! Native implementation of pith-io.
 
-use pith_io::{InputStream, OutputStream, Pollable, StreamError};
+use rhizome_pith_io::{InputStream, OutputStream, Pollable, StreamError};
 use std::io::{Read, Write};
 
 /// An input stream wrapping any `std::io::Read`.

@@ -1,6 +1,6 @@
 //! Native nanoid implementation using the nanoid crate.
 
-use pith_nanoid::NanoId;
+use rhizome_pith_nanoid::NanoId;
 
 /// Nanoid generator using the nanoid crate.
 #[derive(Debug, Default, Clone, Copy)]

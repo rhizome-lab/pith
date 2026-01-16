@@ -1,5 +1,5 @@
 [package]
-name = "pith-config"
+name = "rhizome-pith-config"
 description = "Runtime configuration interfaces"
 version.workspace = true
 edition.workspace = true

@@ -4,7 +4,7 @@
 
 use std::path::Path;
 
-pub use pith_io::{InputStream, OutputStream, StreamError};
+pub use rhizome_pith_io::{InputStream, OutputStream, StreamError};
 
 /// Filesystem error types.
 #[derive(Debug)]

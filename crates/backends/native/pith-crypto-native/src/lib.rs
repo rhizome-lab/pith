@@ -1,6 +1,6 @@
 //! Native implementation of pith-crypto using RustCrypto.
 
-use pith_crypto::{Cipher, CryptoError, Hash, Hmac, Kdf, Signature};
+use rhizome_pith_crypto::{Cipher, CryptoError, Hash, Hmac, Kdf, Signature};
 
 // ============================================================================
 // Hashing

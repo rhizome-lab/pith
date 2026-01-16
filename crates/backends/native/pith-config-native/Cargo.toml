@@ -1,5 +1,5 @@
 [package]
-name = "pith-config-native"
+name = "rhizome-pith-config-native"
 description = "Native configuration implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-config = { path = "../../../interfaces/pith-config" }
+rhizome-pith-config = { path = "../../../interfaces/pith-config" }

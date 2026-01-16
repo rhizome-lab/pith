@@ -1,6 +1,6 @@
 //! Native key-value store implementation.
 
-use pith_keyvalue::{AtomicKeyValue, Error, KeyValue};
+use rhizome_pith_keyvalue::{AtomicKeyValue, Error, KeyValue};
 use std::collections::HashMap;
 use std::sync::RwLock;
 

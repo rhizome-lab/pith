@@ -1,5 +1,5 @@
 [package]
-name = "pith-sql"
+name = "rhizome-pith-sql"
 description = "SQL database interfaces"
 version.workspace = true
 edition.workspace = true

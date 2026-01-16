@@ -1,5 +1,5 @@
 [package]
-name = "pith-http"
+name = "rhizome-pith-http"
 description = "HTTP interfaces"
 version.workspace = true
 edition.workspace = true

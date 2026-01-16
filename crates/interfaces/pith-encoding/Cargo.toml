@@ -1,5 +1,5 @@
 [package]
-name = "pith-encoding"
+name = "rhizome-pith-encoding"
 description = "Encoding/decoding interfaces"
 version.workspace = true
 edition.workspace = true

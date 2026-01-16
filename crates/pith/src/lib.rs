@@ -20,11 +20,11 @@
 //!
 //! | Crate | Domain |
 //! |-------|--------|
-//! | [`pith-clocks`](https://docs.rs/pith-clocks) | Time and timestamps |
-//! | [`pith-filesystem`](https://docs.rs/pith-filesystem) | File I/O |
-//! | [`pith-io`](https://docs.rs/pith-io) | Streams and polling |
-//! | [`pith-random`](https://docs.rs/pith-random) | Randomness |
-//! | [`pith-sockets`](https://docs.rs/pith-sockets) | Raw networking |
+//! | [`rhizome-pith-clocks`](https://docs.rs/rhizome-pith-clocks) | Time and timestamps |
+//! | [`rhizome-pith-filesystem`](https://docs.rs/rhizome-pith-filesystem) | File I/O |
+//! | [`rhizome-pith-io`](https://docs.rs/rhizome-pith-io) | Streams and polling |
+//! | [`rhizome-pith-random`](https://docs.rs/rhizome-pith-random) | Randomness |
+//! | [`rhizome-pith-sockets`](https://docs.rs/rhizome-pith-sockets) | Raw networking |
 //!
 //! ### Contested Domains (Medium Value)
 //!
@@ -32,14 +32,14 @@
 //!
 //! | Crate | Domain | Ecosystem Alternatives |
 //! |-------|--------|----------------------|
-//! | [`pith-http`](https://docs.rs/pith-http) | HTTP client/server | reqwest, ureq, hyper |
-//! | [`pith-sql`](https://docs.rs/pith-sql) | SQL databases | rusqlite, sqlx, diesel |
-//! | [`pith-cache`](https://docs.rs/pith-cache) | Caching with TTL | moka, cached, etc. |
-//! | [`pith-crypto`](https://docs.rs/pith-crypto) | Cryptography | ring, rustcrypto |
-//! | [`pith-logging`](https://docs.rs/pith-logging) | Logging | log, tracing |
-//! | [`pith-markdown`](https://docs.rs/pith-markdown) | Markdown | pulldown-cmark, comrak |
-//! | [`pith-config`](https://docs.rs/pith-config) | Configuration | figment, config |
-//! | [`pith-websocket`](https://docs.rs/pith-websocket) | WebSocket | tungstenite, etc. |
+//! | [`rhizome-pith-http`](https://docs.rs/rhizome-pith-http) | HTTP client/server | reqwest, ureq, hyper |
+//! | [`rhizome-pith-sql`](https://docs.rs/rhizome-pith-sql) | SQL databases | rusqlite, sqlx, diesel |
+//! | [`rhizome-pith-cache`](https://docs.rs/rhizome-pith-cache) | Caching with TTL | moka, cached, etc. |
+//! | [`rhizome-pith-crypto`](https://docs.rs/rhizome-pith-crypto) | Cryptography | ring, rustcrypto |
+//! | [`rhizome-pith-logging`](https://docs.rs/rhizome-pith-logging) | Logging | log, tracing |
+//! | [`rhizome-pith-markdown`](https://docs.rs/rhizome-pith-markdown) | Markdown | pulldown-cmark, comrak |
+//! | [`rhizome-pith-config`](https://docs.rs/rhizome-pith-config) | Configuration | figment, config |
+//! | [`rhizome-pith-websocket`](https://docs.rs/rhizome-pith-websocket) | WebSocket | tungstenite, etc. |
 //!
 //! ## Solved Domains (Use Directly)
 //!

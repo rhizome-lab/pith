@@ -1,6 +1,6 @@
 //! Native configuration implementation using environment variables.
 
-use pith_config::{Config, ConfigMut, Error};
+use rhizome_pith_config::{Config, ConfigMut, Error};
 use std::collections::HashMap;
 use std::env;
 

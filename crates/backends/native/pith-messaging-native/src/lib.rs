@@ -1,6 +1,6 @@
 //! Native message queue implementation using tokio channels.
 
-use pith_messaging::{Channel, Error, Message, Messaging, Receiver, Sender, Subscriber, Topic};
+use rhizome_pith_messaging::{Channel, Error, Message, Messaging, Receiver, Sender, Subscriber, Topic};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use std::time::Duration;

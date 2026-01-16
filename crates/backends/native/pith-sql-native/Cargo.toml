@@ -1,5 +1,5 @@
 [package]
-name = "pith-sql-native"
+name = "rhizome-pith-sql-native"
 description = "Native implementation of pith-sql using libsql"
 version.workspace = true
 edition.workspace = true
@@ -7,6 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-sql = { path = "../../../interfaces/pith-sql" }
+rhizome-pith-sql = { path = "../../../interfaces/pith-sql" }
 libsql.workspace = true
 tokio = { workspace = true }

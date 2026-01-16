@@ -1,5 +1,5 @@
 [package]
-name = "pith-logging"
+name = "rhizome-pith-logging"
 description = "Structured logging interfaces"
 version.workspace = true
 edition.workspace = true

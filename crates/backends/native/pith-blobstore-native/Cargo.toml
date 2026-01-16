@@ -1,5 +1,5 @@
 [package]
-name = "pith-blobstore-native"
+name = "rhizome-pith-blobstore-native"
 description = "Native blob storage implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-pith-blobstore = { path = "../../../interfaces/pith-blobstore" }
+rhizome-pith-blobstore = { path = "../../../interfaces/pith-blobstore" }
 tokio.workspace = true
 
 [dev-dependencies]
