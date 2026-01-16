@@ -35,6 +35,48 @@ APIs likely to change or too platform-specific:
 - **pith-i2c / pith-spi / pith-usb** - hardware interfaces (niche, platform-specific)
 - **pith-distributed-lock** - distributed locking (niche)
 
+## Potential Interfaces
+
+Application-level interfaces to consider (beyond WASI):
+
+### Identity / Auth
+- **pith-jwt** - JWT parsing/validation/creation
+- **pith-oauth** - OAuth flow abstractions
+- **pith-session** - session management
+
+### Data / Validation
+- **pith-cache** - caching with TTL/LRU policies
+- **pith-validation** - schema validation
+- **pith-serialization** - JSON/TOML/YAML/etc (or per-format crates)
+
+### Text / Formatting
+- **pith-i18n** - internationalization/localization
+- **pith-markdown** - markdown parsing/rendering
+- **pith-template** - templating
+
+### Media
+- **pith-image** - image metadata/transforms
+- **pith-audio** - audio metadata/processing
+- **pith-video** - video metadata
+
+### Communication
+- **pith-email** - email sending/parsing
+- **pith-notification** - push notifications
+
+### Identifiers
+- **pith-uuid** - UUID generation/parsing
+- **pith-nanoid** - nanoid generation
+- **pith-snowflake** - snowflake IDs
+
+### Scheduling
+- **pith-cron** - cron expressions/scheduling
+- **pith-delay** - delayed/scheduled tasks
+
+### no_std Primitives
+- **pith-collections** - portable collections
+- **pith-sync** - sync primitives (mutex, rwlock, etc)
+- **pith-alloc** - allocator interfaces
+
 ## Future Considerations
 
 - **`spore-pith`**: Lua bindings (belongs in Spore, not here)
