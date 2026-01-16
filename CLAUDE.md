@@ -60,3 +60,5 @@ From ecosystem-wide session analysis:
 - Async-first where blocking is possible
 - Mirror WASI structure but diverge for ergonomics where sensible
 - Prefer portability over power: simpler interfaces that work everywhere beat feature-rich ones that only work on some platforms
+
+See [DESIGN.md](DESIGN.md) for detailed API design guidelines.
