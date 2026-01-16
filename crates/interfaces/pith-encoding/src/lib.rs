@@ -40,27 +40,21 @@ pub trait UrlEncoding {
 }
 
 /// Decoding errors.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, thiserror::Error)]
 pub enum DecodeError {
     /// Invalid character in input.
+    #[error("invalid character: {0:?}")]
     InvalidCharacter(char),
     /// Invalid length.
+    #[error("invalid length")]
     InvalidLength,
     /// Invalid padding.
+    #[error("invalid padding")]
     InvalidPadding,
     /// Invalid UTF-8.
+    #[error("invalid UTF-8")]
     InvalidUtf8,
+    /// Other error.
+    #[error("{0}")]
+    Other(String),
 }
-
-impl std::fmt::Display for DecodeError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::InvalidCharacter(c) => write!(f, "invalid character: {:?}", c),
-            Self::InvalidLength => write!(f, "invalid length"),
-            Self::InvalidPadding => write!(f, "invalid padding"),
-            Self::InvalidUtf8 => write!(f, "invalid UTF-8"),
-        }
-    }
-}
-
-impl std::error::Error for DecodeError {}

@@ -5,12 +5,17 @@
 use std::future::Future;
 
 /// Error type for stream operations.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 pub enum StreamError {
     /// End of stream reached.
+    #[error("stream closed")]
     Closed,
     /// Last operation failed.
+    #[error("last operation failed")]
     LastOperationFailed,
+    /// Other error.
+    #[error("{0}")]
+    Other(String),
 }
 
 /// An input stream.

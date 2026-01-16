@@ -12,6 +12,8 @@ pub enum Error {
     InvalidTimezone(String),
     #[error("conversion error: {0}")]
     Conversion(String),
+    #[error("{0}")]
+    Other(String),
 }
 
 /// Get the system's local timezone.

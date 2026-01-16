@@ -9,6 +9,8 @@ pub enum Error {
     NotFound(String),
     #[error("invalid value: {0}")]
     InvalidValue(String),
+    #[error("{0}")]
+    Other(String),
 }
 
 /// A configuration source.

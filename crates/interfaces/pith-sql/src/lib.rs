@@ -89,36 +89,27 @@ impl Row {
 }
 
 /// Database errors.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, thiserror::Error)]
 pub enum Error {
     /// Connection failed.
+    #[error("connection failed")]
     ConnectionFailed,
     /// Query syntax error.
+    #[error("syntax error: {0}")]
     SyntaxError(String),
     /// Constraint violation.
+    #[error("constraint violation: {0}")]
     ConstraintViolation(String),
     /// Type mismatch.
+    #[error("type mismatch")]
     TypeMismatch,
     /// Database is busy/locked.
+    #[error("database busy")]
     Busy,
     /// Other error.
+    #[error("{0}")]
     Other(String),
 }
-
-impl std::fmt::Display for Error {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::ConnectionFailed => write!(f, "connection failed"),
-            Self::SyntaxError(s) => write!(f, "syntax error: {}", s),
-            Self::ConstraintViolation(s) => write!(f, "constraint violation: {}", s),
-            Self::TypeMismatch => write!(f, "type mismatch"),
-            Self::Busy => write!(f, "database busy"),
-            Self::Other(s) => write!(f, "{}", s),
-        }
-    }
-}
-
-impl std::error::Error for Error {}
 
 /// A database connection.
 pub trait Connection {

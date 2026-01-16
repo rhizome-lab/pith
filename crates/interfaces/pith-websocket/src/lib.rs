@@ -15,6 +15,8 @@ pub enum Error {
     Closed,
     #[error("protocol error: {0}")]
     Protocol(String),
+    #[error("{0}")]
+    Other(String),
 }
 
 /// A WebSocket message.

@@ -1762,6 +1762,9 @@ dependencies = [
 [[package]]
 name = "pith-crypto"
 version = "0.1.0"
+dependencies = [
+ "thiserror 2.0.17",
+]
 
 [[package]]
 name = "pith-crypto-native"
@@ -1796,6 +1799,9 @@ dependencies = [
 [[package]]
 name = "pith-encoding"
 version = "0.1.0"
+dependencies = [
+ "thiserror 2.0.17",
+]
 
 [[package]]
 name = "pith-encoding-native"
@@ -1847,6 +1853,9 @@ dependencies = [
 [[package]]
 name = "pith-io"
 version = "0.1.0"
+dependencies = [
+ "thiserror 2.0.17",
+]
 
 [[package]]
 name = "pith-io-native"
@@ -1940,6 +1949,9 @@ dependencies = [
 [[package]]
 name = "pith-sql"
 version = "0.1.0"
+dependencies = [
+ "thiserror 2.0.17",
+]
 
 [[package]]
 name = "pith-sql-native"

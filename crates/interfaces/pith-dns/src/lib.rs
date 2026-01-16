@@ -10,6 +10,8 @@ pub enum Error {
     Lookup(String),
     #[error("no records found")]
     NoRecords,
+    #[error("{0}")]
+    Other(String),
 }
 
 /// A DNS resolver.

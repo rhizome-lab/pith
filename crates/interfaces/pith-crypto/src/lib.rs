@@ -93,30 +93,24 @@ pub trait Kdf {
 }
 
 /// Cryptographic errors.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, thiserror::Error)]
 pub enum CryptoError {
     /// Invalid key size.
+    #[error("invalid key size")]
     InvalidKeySize,
     /// Invalid nonce size.
+    #[error("invalid nonce size")]
     InvalidNonceSize,
     /// Authentication failed (decryption).
+    #[error("authentication failed")]
     AuthenticationFailed,
     /// Invalid signature.
+    #[error("invalid signature")]
     InvalidSignature,
+    /// Other error.
+    #[error("{0}")]
+    Other(String),
 }
-
-impl std::fmt::Display for CryptoError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::InvalidKeySize => write!(f, "invalid key size"),
-            Self::InvalidNonceSize => write!(f, "invalid nonce size"),
-            Self::AuthenticationFailed => write!(f, "authentication failed"),
-            Self::InvalidSignature => write!(f, "invalid signature"),
-        }
-    }
-}
-
-impl std::error::Error for CryptoError {}
 
 /// Constant-time equality comparison.
 fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {

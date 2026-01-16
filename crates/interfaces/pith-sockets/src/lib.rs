@@ -26,6 +26,8 @@ pub enum Error {
     Access,
     #[error("I/O error: {0}")]
     Io(#[from] std::io::Error),
+    #[error("{0}")]
+    Other(String),
 }
 
 /// A TCP socket that can connect to a remote address.
