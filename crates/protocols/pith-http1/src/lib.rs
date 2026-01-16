@@ -6,20 +6,35 @@ use std::collections::HashMap;
 use std::io::{BufRead, Write};
 
 /// HTTP/1.1 errors.
-#[derive(Debug, thiserror::Error)]
+#[derive(Debug)]
 pub enum Error {
-    #[error("invalid request line")]
     InvalidRequestLine,
-    #[error("invalid status line")]
     InvalidStatusLine,
-    #[error("invalid header")]
     InvalidHeader,
-    #[error("invalid method")]
     InvalidMethod,
-    #[error("invalid content length")]
     InvalidContentLength,
-    #[error("I/O error: {0}")]
-    Io(#[from] std::io::Error),
+    Io(std::io::Error),
+}
+
+impl std::fmt::Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InvalidRequestLine => write!(f, "invalid request line"),
+            Self::InvalidStatusLine => write!(f, "invalid status line"),
+            Self::InvalidHeader => write!(f, "invalid header"),
+            Self::InvalidMethod => write!(f, "invalid method"),
+            Self::InvalidContentLength => write!(f, "invalid content length"),
+            Self::Io(e) => write!(f, "I/O error: {}", e),
+        }
+    }
+}
+
+impl std::error::Error for Error {}
+
+impl From<std::io::Error> for Error {
+    fn from(e: std::io::Error) -> Self {
+        Self::Io(e)
+    }
 }
 
 /// HTTP method.

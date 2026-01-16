@@ -21,6 +21,7 @@ members = [
     "crates/interfaces/pith-sql",
     "crates/interfaces/pith-timezone",
     "crates/interfaces/pith-url",
+    "crates/interfaces/pith-uuid",
     "crates/interfaces/pith-websocket",
     # Backends
     "crates/backends/native/pith-blobstore-native",
@@ -40,6 +41,7 @@ members = [
     "crates/backends/native/pith-random-native",
     "crates/backends/native/pith-sockets-native",
     "crates/backends/native/pith-sql-native",
+    "crates/backends/native/pith-uuid-native",
     "crates/backends/native/pith-websocket-native",
     # Protocols
     "crates/protocols/pith-http1",

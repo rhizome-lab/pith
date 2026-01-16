@@ -1827,9 +1827,6 @@ dependencies = [
 [[package]]
 name = "pith-http1"
 version = "0.1.0"
-dependencies = [
- "thiserror 2.0.17",
-]
 
 [[package]]
 name = "pith-io"
@@ -1940,6 +1937,18 @@ name = "pith-url"
 version = "0.1.0"
 dependencies = [
  "url",
+]
+
+[[package]]
+name = "pith-uuid"
+version = "0.1.0"
+
+[[package]]
+name = "pith-uuid-native"
+version = "0.1.0"
+dependencies = [
+ "pith-uuid",
+ "uuid",
 ]
 
 [[package]]
