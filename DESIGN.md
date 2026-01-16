@@ -6,6 +6,54 @@ Principles and conventions for pith interfaces.
 
 **Portability over power.** Prefer simpler interfaces that work across all platforms over powerful interfaces that only work on some. When in doubt, leave it out - it's easier to add than remove.
 
+## Interface Categories
+
+Not all interfaces are equal in terms of how "pure" or opinionated they are.
+
+### Primitive interfaces (preferred)
+
+Generic abstractions over fundamental capabilities:
+
+- `pith-clocks` - time
+- `pith-random` - randomness
+- `pith-filesystem` - file I/O
+- `pith-io` - streams
+- `pith-sockets` - raw networking
+- `pith-keyvalue` - key-value storage
+
+These are **pure** - they abstract a capability without imposing a specific format or protocol. Backends have freedom in how they implement them.
+
+### Protocol/standard interfaces (use sparingly)
+
+Interfaces that implement specific standards or formats:
+
+- `pith-http` - HTTP protocol
+- `pith-websocket` - WebSocket protocol
+- `pith-cron` - cron expression syntax
+- `pith-markdown` - Markdown format
+- `pith-uuid` - UUID specification
+- `pith-jwt` - JWT specification
+
+These are **opinionated** - they're already constrained by external specifications. The interface is largely dictated by the protocol, leaving less room for abstraction.
+
+### Guidelines
+
+1. **Prefer primitive interfaces** - they provide more value as abstractions
+2. **Protocol interfaces are fine** when the protocol is truly universal (HTTP, UUID)
+3. **Be cautious** with niche protocols - they may not warrant an interface
+4. **Consider whether abstraction adds value** - if every backend will implement the same spec identically, maybe just use a library directly
+
+### When to create a protocol interface
+
+Good reasons:
+- The protocol is universal and long-lived (HTTP, UUID)
+- You need to swap implementations (e.g., different HTTP clients)
+- Testing requires mocking the protocol layer
+
+Weaker reasons:
+- "It would be nice to have" - prefer direct library use
+- The protocol has only one viable implementation
+
 ## Error Handling
 
 ### Manual Display and Error impls
