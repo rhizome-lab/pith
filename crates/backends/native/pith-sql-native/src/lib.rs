@@ -1,14 +1,20 @@
 //! Native implementation of pith-sql using libsql.
 
-use rhizome_pith_sql::{Connection, Database, Error, Row, Value};
+use rhizome_pith_sql::{Connection, Error, Row, Value};
 
-/// libsql database.
-pub struct LibsqlDatabase;
+/// A SQLite connection backed by libsql.
+///
+/// Create connections using [`LibsqlConnection::open`].
+pub struct LibsqlConnection {
+    _db: libsql::Database,
+    conn: libsql::Connection,
+}
 
-impl Database for LibsqlDatabase {
-    type Conn = LibsqlConnection;
-
-    async fn open(path: &str) -> Result<Self::Conn, Error> {
+impl LibsqlConnection {
+    /// Open a connection to a SQLite database at the given path.
+    ///
+    /// Use `:memory:` for an in-memory database.
+    pub async fn open(path: &str) -> Result<Self, Error> {
         let db = libsql::Builder::new_local(path)
             .build()
             .await
@@ -16,12 +22,6 @@ impl Database for LibsqlDatabase {
         let conn = db.connect().map_err(|e| Error::Other(e.to_string()))?;
         Ok(LibsqlConnection { _db: db, conn })
     }
-}
-
-/// libsql connection.
-pub struct LibsqlConnection {
-    _db: libsql::Database,
-    conn: libsql::Connection,
 }
 
 impl Connection for LibsqlConnection {
@@ -120,7 +120,7 @@ mod tests {
 
     #[tokio::test]
     async fn basic_operations() {
-        let conn = LibsqlDatabase::open(":memory:").await.unwrap();
+        let conn = LibsqlConnection::open(":memory:").await.unwrap();
 
         // Create table
         conn.execute(
@@ -146,7 +146,7 @@ mod tests {
 
     #[tokio::test]
     async fn transaction_commit() {
-        let conn = LibsqlDatabase::open(":memory:").await.unwrap();
+        let conn = LibsqlConnection::open(":memory:").await.unwrap();
         conn.execute("CREATE TABLE t (x INTEGER)", &[]).await.unwrap();
 
         conn.begin().await.unwrap();
@@ -159,7 +159,7 @@ mod tests {
 
     #[tokio::test]
     async fn transaction_rollback() {
-        let conn = LibsqlDatabase::open(":memory:").await.unwrap();
+        let conn = LibsqlConnection::open(":memory:").await.unwrap();
         conn.execute("CREATE TABLE t (x INTEGER)", &[]).await.unwrap();
 
         conn.begin().await.unwrap();

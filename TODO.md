@@ -14,7 +14,18 @@
 
 ## Backlog
 
-WASI Phase 1/2 interfaces:
+### Capability Audit
+
+- [ ] Audit all interfaces for capability-based compliance (no `open(path)`, `connect(url)` in traits)
+  - [x] pith-sql - removed `Database` trait, `Connection` is now capability-based
+  - [ ] pith-filesystem - verify pre-opened directory model
+  - [ ] pith-sockets - verify no ambient connect
+  - [ ] pith-http - verify no ambient client creation
+  - [ ] pith-keyvalue - verify no ambient store opening
+  - [ ] pith-blobstore - verify no ambient container opening
+  - [ ] All other interfaces
+
+### WASI Phase 1/2 interfaces
 
 - [x] **pith-url** - URL parsing (WASI Phase 1)
 - [x] **pith-timezone** - timezone handling (WASI Phase 2)

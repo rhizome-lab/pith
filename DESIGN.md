@@ -6,6 +6,50 @@ Principles and conventions for pith interfaces.
 
 **Portability over power.** Prefer simpler interfaces that work across all platforms over powerful interfaces that only work on some. When in doubt, leave it out - it's easier to add than remove.
 
+**Capability-based first.** No ambient authority. Interfaces receive capabilities (pre-opened handles, connections, etc.) rather than acquiring them by path or name.
+
+## Capability-Based Design
+
+Pith follows the capability-based security model, inspired by WASI. This is a core principle, not optional.
+
+### The Rule
+
+**Interfaces never acquire resources by path/name. They receive pre-opened handles from the host.**
+
+### What This Means
+
+```rust
+// WRONG - interface acquires resource by path
+pub trait Database {
+    fn open(path: &str) -> impl Future<Output = Result<Self::Conn, Error>>;
+}
+
+// RIGHT - interface operates on provided connection
+pub trait Connection {
+    fn query(&self, sql: &str, params: &[Value]) -> impl Future<Output = Result<Vec<Row>, Error>>;
+    fn execute(&self, sql: &str, params: &[Value]) -> impl Future<Output = Result<u64, Error>>;
+}
+
+// Backend provides the constructor, not the interface
+impl SqliteConnection {
+    pub fn new(path: &str) -> Result<Self, Error> { ... }
+}
+```
+
+### Why This Matters
+
+1. **Security**: The host controls what resources the application can access
+2. **Testability**: Easy to inject mock capabilities
+3. **Portability**: Same interface works whether the resource is local, remote, or sandboxed
+4. **WASI alignment**: Matches how WASI handles filesystem, sockets, etc.
+
+### Checklist for New Interfaces
+
+- [ ] No `open(path)`, `connect(url)`, or similar in the trait
+- [ ] Constructors live in backends, not interfaces
+- [ ] The trait operates on an already-acquired capability
+- [ ] Tests can inject mock implementations without filesystem/network access
+
 ## Interface Categories
 
 Pith's value varies by domain. The goal is **reducing decision fatigue** while providing **consistent APIs**.

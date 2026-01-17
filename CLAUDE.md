@@ -55,8 +55,8 @@ From ecosystem-wide session analysis:
 
 ## Design
 
+- **Capability-based first**: No ambient authority. Interfaces never acquire resources by path/name - they receive pre-opened handles from the host. If you see `open(path: &str)` in an interface, it's wrong.
 - Interfaces define traits, backends provide implementations
-- Capability-based (no global/ambient access)
 - Async-first where blocking is possible
 - Mirror WASI structure but diverge for ergonomics where sensible
 - Prefer portability over power: simpler interfaces that work everywhere beat feature-rich ones that only work on some platforms

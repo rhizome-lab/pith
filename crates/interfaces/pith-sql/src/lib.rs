@@ -122,6 +122,10 @@ impl fmt::Display for Error {
 impl std::error::Error for Error {}
 
 /// A database connection.
+///
+/// This trait defines operations on an already-opened connection.
+/// The connection is obtained from a backend-specific constructor,
+/// following the capability-based model (no `open(path)` in the interface).
 pub trait Connection {
     /// Execute a query that returns rows.
     fn query(
@@ -145,12 +149,4 @@ pub trait Connection {
 
     /// Rollback the current transaction.
     fn rollback(&self) -> impl Future<Output = Result<(), Error>>;
-}
-
-/// A database that can open connections.
-pub trait Database {
-    type Conn: Connection;
-
-    /// Open a connection to the database.
-    fn open(path: &str) -> impl Future<Output = Result<Self::Conn, Error>>;
 }
