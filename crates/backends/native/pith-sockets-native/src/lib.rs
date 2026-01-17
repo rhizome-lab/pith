@@ -1,6 +1,6 @@
 //! Native implementation of pith-sockets using tokio.
 
-use rhizome_pith_sockets::{Error, Resolver, TcpConnect, TcpListen, TcpStream, UdpSocket};
+use rhizome_pith_sockets::{Error, Resolver, TcpConnect, TcpListener, TcpStream, UdpSocket};
 use std::net::{IpAddr, SocketAddr};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net;
@@ -22,16 +22,19 @@ impl TcpConnect for NativeTcpConnect {
 #[derive(Debug)]
 pub struct NativeTcpListener(net::TcpListener);
 
-impl TcpListen for NativeTcpListener {
-    type Stream = NativeTcpStream;
-
-    fn bind(addr: SocketAddr) -> Result<Self, Error> {
+impl NativeTcpListener {
+    /// Bind to a local address.
+    pub fn bind(addr: SocketAddr) -> Result<Self, Error> {
         // Use std to bind synchronously, then convert to tokio
         let std_listener = std::net::TcpListener::bind(addr)?;
         std_listener.set_nonblocking(true)?;
         let listener = net::TcpListener::from_std(std_listener)?;
         Ok(Self(listener))
     }
+}
+
+impl TcpListener for NativeTcpListener {
+    type Stream = NativeTcpStream;
 
     async fn accept(&self) -> Result<(Self::Stream, SocketAddr), Error> {
         let (stream, addr) = self.0.accept().await?;
@@ -89,14 +92,17 @@ impl TcpStream for NativeTcpStream {
 #[derive(Debug)]
 pub struct NativeUdpSocket(net::UdpSocket);
 
-impl UdpSocket for NativeUdpSocket {
-    fn bind(addr: SocketAddr) -> Result<Self, Error> {
+impl NativeUdpSocket {
+    /// Bind to a local address.
+    pub fn bind(addr: SocketAddr) -> Result<Self, Error> {
         let std_socket = std::net::UdpSocket::bind(addr)?;
         std_socket.set_nonblocking(true)?;
         let socket = net::UdpSocket::from_std(std_socket)?;
         Ok(Self(socket))
     }
+}
 
+impl UdpSocket for NativeUdpSocket {
     async fn send_to(&self, buf: &[u8], addr: SocketAddr) -> Result<usize, Error> {
         Ok(self.0.send_to(buf, addr).await?)
     }

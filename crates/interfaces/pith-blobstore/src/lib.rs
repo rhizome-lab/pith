@@ -1,6 +1,9 @@
 //! Blob storage interfaces.
 //!
-//! Based on WASI blobstore.
+//! Based on WASI blobstore. Follows capability-based design: the `Container`
+//! trait operates on an already-opened container. Backends provide constructors.
+//!
+//! See ADR-0004 for rationale.
 
 use std::fmt;
 use std::future::Future;
@@ -39,6 +42,18 @@ pub struct ObjectMeta {
 }
 
 /// A blob storage container.
+///
+/// This trait operates on an already-opened container. The container is
+/// obtained from a backend constructor, not the interface.
+///
+/// ```ignore
+/// // Backend provides construction
+/// let container = store.open_container("my-bucket")?;
+///
+/// // Interface defines operations
+/// container.put("key", data).await?;
+/// let data = container.get("key").await?;
+/// ```
 pub trait Container {
     /// Get object data.
     fn get(&self, name: &str) -> impl Future<Output = Result<Vec<u8>, Error>>;
@@ -60,25 +75,4 @@ pub trait Container {
 
     /// Copy an object within this container.
     fn copy(&self, src: &str, dst: &str) -> impl Future<Output = Result<(), Error>>;
-}
-
-/// A blob store that manages containers.
-pub trait BlobStore {
-    /// The container type.
-    type Container: Container;
-
-    /// Create a new container.
-    fn create_container(&self, name: &str) -> impl Future<Output = Result<(), Error>>;
-
-    /// Delete a container.
-    fn delete_container(&self, name: &str) -> impl Future<Output = Result<(), Error>>;
-
-    /// Get a container by name.
-    fn container(&self, name: &str) -> impl Future<Output = Result<Self::Container, Error>>;
-
-    /// Check if a container exists.
-    fn container_exists(&self, name: &str) -> impl Future<Output = Result<bool, Error>>;
-
-    /// List all containers.
-    fn list_containers(&self) -> impl Future<Output = Result<Vec<String>, Error>>;
 }

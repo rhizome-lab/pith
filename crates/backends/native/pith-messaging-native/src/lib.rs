@@ -1,6 +1,9 @@
 //! Native message queue implementation using tokio channels.
+//!
+//! Provides `MemoryMessaging` for creating channels and topics,
+//! with implementations of the `Channel`, `Topic`, and related traits.
 
-use rhizome_pith_messaging::{Channel, Error, Message, Messaging, Receiver, Sender, Subscriber, Topic};
+use rhizome_pith_messaging::{Channel, Error, Message, Receiver, Sender, Subscriber, Topic};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use std::time::Duration;
@@ -164,6 +167,9 @@ impl Topic for SharedTopic {
 }
 
 /// In-memory messaging system.
+///
+/// This struct manages channels and topics. Topic/channel construction is
+/// backend-specific, while operations use traits from the interface.
 #[derive(Default)]
 pub struct MemoryMessaging {
     topics: RwLock<HashMap<String, Arc<BroadcastTopic>>>,
@@ -189,17 +195,14 @@ impl MemoryMessaging {
             topic_capacity,
         }
     }
-}
 
-impl Messaging for MemoryMessaging {
-    type Channel = MpscChannel;
-    type Topic = SharedTopic;
-
-    fn channel(&self) -> Self::Channel {
+    /// Create a new channel.
+    pub fn channel(&self) -> MpscChannel {
         MpscChannel::with_buffer_size(self.channel_buffer)
     }
 
-    async fn topic(&self, name: &str) -> Result<Self::Topic, Error> {
+    /// Open or create a topic by name.
+    pub fn open_topic(&self, name: &str) -> Result<SharedTopic, Error> {
         // Try read first
         {
             let topics = self.topics.read().map_err(|e| Error::Other(e.to_string()))?;
@@ -245,7 +248,7 @@ mod tests {
     #[tokio::test]
     async fn topic_pubsub() {
         let messaging = MemoryMessaging::new();
-        let topic = messaging.topic("events").await.unwrap();
+        let topic = messaging.open_topic("events").unwrap();
 
         let sub1 = topic.subscribe().await.unwrap();
         let sub2 = topic.subscribe().await.unwrap();

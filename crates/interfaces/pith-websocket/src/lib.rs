@@ -1,6 +1,9 @@
 //! WebSocket interfaces.
 //!
-//! Based on RFC 6455.
+//! Based on RFC 6455. Follows capability-based design: the `WebSocketClient`
+//! trait operates on an already-connected WebSocket. Backends provide constructors.
+//!
+//! See ADR-0004 for rationale.
 
 use std::fmt;
 use std::future::Future;
@@ -44,7 +47,19 @@ pub enum Message {
     Close,
 }
 
-/// A WebSocket client connection.
+/// A connected WebSocket client.
+///
+/// This trait operates on an already-connected WebSocket. The connection
+/// is established by a backend constructor, not the interface.
+///
+/// ```ignore
+/// // Backend provides connection
+/// let client = NativeWebSocketClient::connect("wss://example.com").await?;
+///
+/// // Interface defines operations
+/// client.send(Message::Text("hello".into())).await?;
+/// let msg = client.recv().await?;
+/// ```
 pub trait WebSocketClient {
     /// Send a message.
     fn send(&mut self, msg: Message) -> impl Future<Output = Result<(), Error>>;
@@ -54,12 +69,4 @@ pub trait WebSocketClient {
 
     /// Close the connection.
     fn close(&mut self) -> impl Future<Output = Result<(), Error>>;
-}
-
-/// A WebSocket client connector.
-pub trait WebSocketConnector {
-    type Client: WebSocketClient;
-
-    /// Connect to a WebSocket server.
-    fn connect(&self, url: &str) -> impl Future<Output = Result<Self::Client, Error>>;
 }

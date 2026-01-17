@@ -1,6 +1,9 @@
 //! Message queue interfaces.
 //!
-//! Based on WASI messaging.
+//! Based on WASI messaging. Follows capability-based design: traits operate
+//! on already-opened channels/topics. Backends provide constructors.
+//!
+//! See ADR-0004 for rationale.
 
 use std::fmt;
 use std::future::Future;
@@ -52,12 +55,18 @@ impl Message {
 }
 
 /// A message sender.
+///
+/// This trait operates on an already-opened sender endpoint.
+/// The sender is obtained from a backend constructor.
 pub trait Sender {
     /// Send a message.
     fn send(&self, message: Message) -> impl Future<Output = Result<(), Error>>;
 }
 
 /// A message receiver.
+///
+/// This trait operates on an already-opened receiver endpoint.
+/// The receiver is obtained from a backend constructor.
 pub trait Receiver {
     /// Receive a message, waiting indefinitely.
     fn receive(&self) -> impl Future<Output = Result<Message, Error>>;
@@ -70,13 +79,16 @@ pub trait Receiver {
 }
 
 /// A channel for point-to-point messaging.
+///
+/// This trait operates on an already-opened channel.
+/// The channel is obtained from a backend constructor.
 pub trait Channel {
     /// The sender type.
     type Sender: Sender;
     /// The receiver type.
     type Receiver: Receiver;
 
-    /// Create a new channel.
+    /// Create a new sender/receiver pair from this channel.
     fn create(&self) -> (Self::Sender, Self::Receiver);
 }
 
@@ -87,6 +99,18 @@ pub trait Subscriber: Receiver {
 }
 
 /// A topic for publish/subscribe messaging.
+///
+/// This trait operates on an already-opened topic.
+/// The topic is obtained from a backend constructor.
+///
+/// ```ignore
+/// // Backend provides construction
+/// let topic = messaging_backend.open_topic("events")?;
+///
+/// // Interface defines operations
+/// topic.publish(Message::new(b"hello")).await?;
+/// let subscriber = topic.subscribe().await?;
+/// ```
 pub trait Topic {
     /// The subscriber type.
     type Subscriber: Subscriber;
@@ -96,18 +120,4 @@ pub trait Topic {
 
     /// Subscribe to receive messages.
     fn subscribe(&self) -> impl Future<Output = Result<Self::Subscriber, Error>>;
-}
-
-/// A messaging system that provides channels and topics.
-pub trait Messaging {
-    /// The channel type.
-    type Channel: Channel;
-    /// The topic type.
-    type Topic: Topic;
-
-    /// Create a new channel.
-    fn channel(&self) -> Self::Channel;
-
-    /// Get or create a topic by name.
-    fn topic(&self, name: &str) -> impl Future<Output = Result<Self::Topic, Error>>;
 }

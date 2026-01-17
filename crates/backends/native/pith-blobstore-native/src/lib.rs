@@ -1,10 +1,16 @@
 //! Native blob storage implementation.
+//!
+//! Provides `MemoryBlobStore` for creating and managing containers,
+//! and `MemoryContainer` which implements the `Container` trait.
 
-use rhizome_pith_blobstore::{BlobStore, Container, Error, ObjectMeta};
+use rhizome_pith_blobstore::{Container, Error, ObjectMeta};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 
 /// In-memory blob storage.
+///
+/// This struct manages containers. Container construction is backend-specific,
+/// while container operations use the `Container` trait from the interface.
 #[derive(Debug, Default)]
 pub struct MemoryBlobStore {
     containers: RwLock<HashMap<String, Arc<MemoryContainer>>>,
@@ -17,12 +23,9 @@ impl MemoryBlobStore {
             containers: RwLock::new(HashMap::new()),
         }
     }
-}
 
-impl BlobStore for MemoryBlobStore {
-    type Container = MemoryContainer;
-
-    async fn create_container(&self, name: &str) -> Result<(), Error> {
+    /// Create a new container.
+    pub fn create_container(&self, name: &str) -> Result<(), Error> {
         let mut containers = self
             .containers
             .write()
@@ -34,7 +37,8 @@ impl BlobStore for MemoryBlobStore {
         Ok(())
     }
 
-    async fn delete_container(&self, name: &str) -> Result<(), Error> {
+    /// Delete a container.
+    pub fn delete_container(&self, name: &str) -> Result<(), Error> {
         let mut containers = self
             .containers
             .write()
@@ -45,7 +49,8 @@ impl BlobStore for MemoryBlobStore {
         Ok(())
     }
 
-    async fn container(&self, name: &str) -> Result<Self::Container, Error> {
+    /// Open a container by name.
+    pub fn open_container(&self, name: &str) -> Result<MemoryContainer, Error> {
         let containers = self
             .containers
             .read()
@@ -58,7 +63,8 @@ impl BlobStore for MemoryBlobStore {
             .ok_or_else(|| Error::ContainerNotFound(name.to_string()))
     }
 
-    async fn container_exists(&self, name: &str) -> Result<bool, Error> {
+    /// Check if a container exists.
+    pub fn container_exists(&self, name: &str) -> Result<bool, Error> {
         let containers = self
             .containers
             .read()
@@ -66,7 +72,8 @@ impl BlobStore for MemoryBlobStore {
         Ok(containers.contains_key(name))
     }
 
-    async fn list_containers(&self) -> Result<Vec<String>, Error> {
+    /// List all container names.
+    pub fn list_containers(&self) -> Result<Vec<String>, Error> {
         let containers = self
             .containers
             .read()
@@ -207,21 +214,21 @@ mod tests {
     async fn container_lifecycle() {
         let store = MemoryBlobStore::new();
 
-        store.create_container("test").await.unwrap();
-        assert!(store.container_exists("test").await.unwrap());
+        store.create_container("test").unwrap();
+        assert!(store.container_exists("test").unwrap());
 
-        let names = store.list_containers().await.unwrap();
+        let names = store.list_containers().unwrap();
         assert_eq!(names.len(), 1);
 
-        store.delete_container("test").await.unwrap();
-        assert!(!store.container_exists("test").await.unwrap());
+        store.delete_container("test").unwrap();
+        assert!(!store.container_exists("test").unwrap());
     }
 
     #[tokio::test]
     async fn object_operations() {
         let store = MemoryBlobStore::new();
-        store.create_container("bucket").await.unwrap();
-        let container = store.container("bucket").await.unwrap();
+        store.create_container("bucket").unwrap();
+        let container = store.open_container("bucket").unwrap();
 
         container.put("file.txt", b"hello world").await.unwrap();
         assert!(container.exists("file.txt").await.unwrap());
@@ -237,8 +244,8 @@ mod tests {
     #[tokio::test]
     async fn list_and_copy() {
         let store = MemoryBlobStore::new();
-        store.create_container("bucket").await.unwrap();
-        let container = store.container("bucket").await.unwrap();
+        store.create_container("bucket").unwrap();
+        let container = store.open_container("bucket").unwrap();
 
         container.put("a.txt", b"aaa").await.unwrap();
         container.put("b.txt", b"bbb").await.unwrap();

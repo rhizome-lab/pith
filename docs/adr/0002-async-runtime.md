@@ -9,7 +9,7 @@ Proposed
 Several pith interfaces have async methods:
 - `MonotonicClock::subscribe_duration` / `subscribe_instant`
 - `InputStream::subscribe`, `OutputStream::subscribe`
-- `TcpConnect::connect`, `TcpListen::accept`, etc.
+- `TcpConnect::connect`, `TcpListener::accept`, etc.
 
 These return `impl Future<Output = T>`. For native backends, implementing these futures requires an async runtime (tokio, async-std, smol, etc.).
 

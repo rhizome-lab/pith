@@ -1,6 +1,9 @@
 //! Socket interfaces.
 //!
-//! Based on WASI sockets.
+//! Based on WASI sockets. Follows capability-based design: traits define
+//! operations on already-bound/connected sockets. Backends provide constructors.
+//!
+//! See ADR-0004 for rationale.
 
 use std::future::Future;
 use std::net::{IpAddr, SocketAddr};
@@ -45,7 +48,10 @@ impl From<std::io::Error> for Error {
     }
 }
 
-/// A TCP socket that can connect to a remote address.
+/// A capability to initiate TCP connections.
+///
+/// The host provides this capability, potentially restricted to certain
+/// addresses or ports. Use the backend constructor to obtain an instance.
 pub trait TcpConnect {
     type Stream: TcpStream;
 
@@ -53,14 +59,20 @@ pub trait TcpConnect {
     fn connect(&self, addr: SocketAddr) -> impl Future<Output = Result<Self::Stream, Error>>;
 }
 
-/// A TCP listener that accepts connections.
-pub trait TcpListen {
+/// A bound TCP listener that accepts connections.
+///
+/// This trait operates on an already-bound listener. The binding is done
+/// by the backend constructor, not the interface.
+///
+/// ```ignore
+/// // Backend provides construction
+/// let listener = NativeTcpListener::bind("127.0.0.1:8080")?;
+///
+/// // Interface defines operations
+/// let (stream, addr) = listener.accept().await?;
+/// ```
+pub trait TcpListener {
     type Stream: TcpStream;
-
-    /// Bind to a local address.
-    fn bind(addr: SocketAddr) -> Result<Self, Error>
-    where
-        Self: Sized;
 
     /// Accept a connection.
     fn accept(&self) -> impl Future<Output = Result<(Self::Stream, SocketAddr), Error>>;
@@ -90,13 +102,19 @@ pub trait TcpStream {
     fn peer_addr(&self) -> Result<SocketAddr, Error>;
 }
 
-/// A UDP socket.
+/// A bound UDP socket.
+///
+/// This trait operates on an already-bound socket. The binding is done
+/// by the backend constructor, not the interface.
+///
+/// ```ignore
+/// // Backend provides construction
+/// let socket = NativeUdpSocket::bind("0.0.0.0:0")?;
+///
+/// // Interface defines operations
+/// socket.send_to(b"hello", target_addr).await?;
+/// ```
 pub trait UdpSocket {
-    /// Bind to a local address.
-    fn bind(addr: SocketAddr) -> Result<Self, Error>
-    where
-        Self: Sized;
-
     /// Send data to a remote address.
     fn send_to(&self, buf: &[u8], addr: SocketAddr) -> impl Future<Output = Result<usize, Error>>;
 

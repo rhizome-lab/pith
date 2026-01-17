@@ -16,14 +16,13 @@
 
 ### Capability Audit
 
-- [ ] Audit all interfaces for capability-based compliance (no `open(path)`, `connect(url)` in traits)
-  - [x] pith-sql - removed `Database` trait, `Connection` is now capability-based
-  - [ ] pith-filesystem - verify pre-opened directory model
-  - [ ] pith-sockets - verify no ambient connect
-  - [ ] pith-http - verify no ambient client creation
-  - [ ] pith-keyvalue - verify no ambient store opening
-  - [ ] pith-blobstore - verify no ambient container opening
-  - [ ] All other interfaces
+See [ADR-0004](docs/adr/0004-capability-audit.md) for full audit results.
+
+**Summary**: All 23 interfaces now compliant. Fixed violations:
+- [x] pith-sockets - removed `TcpListen::bind()`, `UdpSocket::bind()`; renamed to `TcpListener`
+- [x] pith-blobstore - removed `BlobStore` trait, kept `Container`
+- [x] pith-websocket - removed `WebSocketConnector` trait, kept `WebSocketClient`
+- [x] pith-messaging - removed `Messaging` trait, kept `Channel`/`Topic`/`Sender`/`Receiver`
 
 ### WASI Phase 1/2 interfaces
 
@@ -102,3 +101,4 @@ Potential interface improvements to consider later:
 - 0001: `InsecureRandom` uses `&mut self` (PRNGs need state)
 - 0002: Async runtime via tokio feature flag
 - 0003: Stdio uses `&mut self` (matches std::io)
+- 0004: Capability audit (4 violations fixed)

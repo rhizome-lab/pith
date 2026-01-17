@@ -1,30 +1,25 @@
 //! Native WebSocket implementation using tungstenite.
 
 use futures_util::{SinkExt, StreamExt};
-use rhizome_pith_websocket::{Error, Message, WebSocketClient, WebSocketConnector};
+use rhizome_pith_websocket::{Error, Message, WebSocketClient};
 use tokio::net::TcpStream;
 use tokio_tungstenite::{
     connect_async, tungstenite::protocol::Message as TungMessage, MaybeTlsStream, WebSocketStream,
 };
 
-/// Native WebSocket connector.
-#[derive(Debug, Default, Clone)]
-pub struct NativeWebSocketConnector;
+/// Native WebSocket connection.
+pub struct NativeWebSocket {
+    inner: WebSocketStream<MaybeTlsStream<TcpStream>>,
+}
 
-impl WebSocketConnector for NativeWebSocketConnector {
-    type Client = NativeWebSocket;
-
-    async fn connect(&self, url: &str) -> Result<Self::Client, Error> {
+impl NativeWebSocket {
+    /// Connect to a WebSocket server.
+    pub async fn connect(url: &str) -> Result<Self, Error> {
         let (ws, _) = connect_async(url)
             .await
             .map_err(|e| Error::ConnectionFailed(e.to_string()))?;
         Ok(NativeWebSocket { inner: ws })
     }
-}
-
-/// Native WebSocket connection.
-pub struct NativeWebSocket {
-    inner: WebSocketStream<MaybeTlsStream<TcpStream>>,
 }
 
 impl WebSocketClient for NativeWebSocket {
