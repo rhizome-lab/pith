@@ -10,7 +10,9 @@ crates/
 ├── protocols/      # Wire format implementations (how it's encoded)
 └── backends/       # Platform implementations (how it runs)
     ├── native/     # Native OS implementations
-    └── wasm/       # WASM implementations
+    ├── wasm/       # Browser WASM implementations
+    ├── portable/   # Pure Rust (works on native + WASM)
+    └── mock/       # Testing mocks
 ```
 
 ### Interfaces (`interfaces/`)
@@ -56,6 +58,7 @@ From ecosystem-wide session analysis:
 ## Design
 
 - **Capability-based first**: No ambient authority. Interfaces never acquire resources by path/name - they receive pre-opened handles from the host. If you see `open(path: &str)` in an interface, it's wrong.
+- **WASI-inspired scope**: Pith covers capability primitives (clocks, fs, sockets, random) and contested infrastructure (http, sql). It does *not* wrap application protocols (LSP, MCP, gRPC) - use ecosystem solutions for those.
 - Interfaces define traits, backends provide implementations
 - Async-first where blocking is possible
 - Mirror WASI structure but diverge for ergonomics where sensible

@@ -1,4 +1,6 @@
-//! Native cron expression implementation.
+//! Portable cron expression implementation.
+//!
+//! Works on both native and WASM targets.
 
 use rhizome_pith_cron::{CronError, CronExpr, CronParser, CronSchedule};
 use std::fmt;

@@ -1,4 +1,6 @@
-//! Native implementation of pith-encoding.
+//! Portable implementation of pith-encoding.
+//!
+//! Works on both native and WASM targets.
 
 use rhizome_pith_encoding::{Base64, Base64Url, DecodeError, Hex, UrlEncoding};
 

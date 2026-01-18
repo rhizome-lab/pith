@@ -1,6 +1,6 @@
 [package]
-name = "rhizome-pith-encoding-native"
-description = "Native implementation of pith-encoding"
+name = "rhizome-pith-encoding-portable"
+description = "Portable implementation of pith-encoding (works on native and WASM)"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

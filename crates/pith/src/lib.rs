@@ -91,8 +91,8 @@
 //! Each interface has one or more backend implementations:
 //!
 //! - `*-native` - Native OS implementation
-//! - `*-wasm` - WebAssembly implementation (planned)
-//! - `*-mock` - Testing mocks (planned)
+//! - `*-wasm` - WebAssembly implementation (partial)
+//! - `*-mock` - Testing mocks
 //!
 //! ## Links
 //!

@@ -27,15 +27,13 @@ members = [
     "crates/interfaces/pith-sql",
     "crates/interfaces/pith-timezone",
     "crates/interfaces/pith-websocket",
-    # Backends
+    # Native backends
     "crates/backends/native/pith-blobstore-native",
     "crates/backends/native/pith-cache-native",
     "crates/backends/native/pith-clocks-native",
     "crates/backends/native/pith-config-native",
-    "crates/backends/native/pith-cron-native",
     "crates/backends/native/pith-crypto-native",
     "crates/backends/native/pith-dns-native",
-    "crates/backends/native/pith-encoding-native",
     "crates/backends/native/pith-filesystem-native",
     "crates/backends/native/pith-http-native",
     "crates/backends/native/pith-io-native",
@@ -54,6 +52,15 @@ members = [
     "crates/backends/mock/pith-clocks-mock",
     "crates/backends/mock/pith-http-mock",
     "crates/backends/mock/pith-random-mock",
+    # WASM backends
+    "crates/backends/wasm/pith-clocks-wasm",
+    "crates/backends/wasm/pith-http-wasm",
+    "crates/backends/wasm/pith-logging-wasm",
+    "crates/backends/wasm/pith-random-wasm",
+    "crates/backends/wasm/pith-websocket-wasm",
+    # Portable backends (work on native and WASM)
+    "crates/backends/portable/pith-cron",
+    "crates/backends/portable/pith-encoding",
     # Protocols
     "crates/protocols/pith-http1",
 ]
