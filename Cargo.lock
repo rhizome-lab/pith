@@ -2095,6 +2095,13 @@ name = "rhizome-pith-clocks"
 version = "0.1.0"
 
 [[package]]
+name = "rhizome-pith-clocks-mock"
+version = "0.1.0"
+dependencies = [
+ "rhizome-pith-clocks",
+]
+
+[[package]]
 name = "rhizome-pith-clocks-native"
 version = "0.1.0"
 dependencies = [
@@ -2185,6 +2192,14 @@ dependencies = [
 [[package]]
 name = "rhizome-pith-http"
 version = "0.1.0"
+
+[[package]]
+name = "rhizome-pith-http-mock"
+version = "0.1.0"
+dependencies = [
+ "rhizome-pith-http",
+ "tokio",
+]
 
 [[package]]
 name = "rhizome-pith-http-native"
@@ -2286,6 +2301,13 @@ dependencies = [
 [[package]]
 name = "rhizome-pith-random"
 version = "0.1.0"
+
+[[package]]
+name = "rhizome-pith-random-mock"
+version = "0.1.0"
+dependencies = [
+ "rhizome-pith-random",
+]
 
 [[package]]
 name = "rhizome-pith-random-native"

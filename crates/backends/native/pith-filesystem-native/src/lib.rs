@@ -29,13 +29,13 @@ impl NativeDir {
 }
 
 impl Directory for NativeDir {
-    fn open_read(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::InputStream, Error> {
+    fn open_read(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::InputStream + rhizome_pith_filesystem::Seek, Error> {
         let full_path = self.resolve(path);
         let file = File::open(&full_path)?;
         Ok(ReaderStream::new(file))
     }
 
-    fn open_write(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::OutputStream, Error> {
+    fn open_write(&self, path: &Path) -> Result<impl rhizome_pith_filesystem::OutputStream + rhizome_pith_filesystem::Seek, Error> {
         let full_path = self.resolve(path);
         let file = OpenOptions::new()
             .write(true)
@@ -210,6 +210,38 @@ mod tests {
             .unwrap();
 
         assert_eq!(entries.len(), 3);
+
+        // Cleanup
+        fs::remove_dir_all(&temp_dir).unwrap();
+    }
+
+    #[test]
+    fn seek_in_file() {
+        use rhizome_pith_filesystem::{InputStream, Seek, SeekFrom};
+
+        let temp_dir = std::env::temp_dir().join("pith-fs-test-4");
+        let _ = fs::remove_dir_all(&temp_dir);
+        fs::create_dir_all(&temp_dir).unwrap();
+
+        let dir = NativeDir::new(&temp_dir);
+
+        // Write a file
+        fs::write(temp_dir.join("seek.txt"), b"hello world").unwrap();
+
+        // Open and seek
+        let mut file = dir.open_read(Path::new("seek.txt")).unwrap();
+        let buf = file.read(5).unwrap();
+        assert_eq!(&buf, b"hello");
+
+        // Seek back and read again
+        file.rewind().unwrap();
+        let buf = file.read(5).unwrap();
+        assert_eq!(&buf, b"hello");
+
+        // Seek to offset 6
+        file.seek(SeekFrom::Start(6)).unwrap();
+        let buf = file.read(5).unwrap();
+        assert_eq!(&buf, b"world");
 
         // Cleanup
         fs::remove_dir_all(&temp_dir).unwrap();

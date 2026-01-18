@@ -11,6 +11,11 @@
    - [x] pith-dns interface + pith-dns-native (via hickory-resolver)
 6. [x] Protocol implementations (`crates/protocols/`)
    - [x] pith-http1 (HTTP/1.1 wire format parsing/serialization)
+7. [x] Mock backends for testing (`crates/backends/mock/`)
+   - [x] pith-clocks-mock (controllable wall/monotonic clocks)
+   - [x] pith-random-mock (deterministic secure/insecure random)
+   - [x] pith-http-mock (request recording, response queuing)
+8. [x] Crypto AAD support (AES-GCM, ChaCha20-Poly1305)
 
 ## Backlog
 
@@ -93,7 +98,7 @@ Application-level interfaces to consider (beyond WASI):
 
 Potential interface improvements to consider later:
 
-- **Filesystem seek**: Add `Seek` trait for random access file operations
+- [x] **Filesystem seek**: Add `Seek` trait for random access file operations
 - **Zero-copy reads**: Add `read_into(&mut self, buf: &mut [u8])` to `InputStream`
 
 ## ADRs

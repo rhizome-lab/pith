@@ -4,7 +4,7 @@
 
 use std::path::Path;
 
-pub use rhizome_pith_io::{InputStream, OutputStream, StreamError};
+pub use rhizome_pith_io::{InputStream, OutputStream, Seek, SeekFrom, StreamError};
 
 /// Filesystem error types.
 #[derive(Debug)]
@@ -64,10 +64,10 @@ pub struct Metadata {
 /// A capability to access a directory and its contents.
 pub trait Directory {
     /// Open a file for reading.
-    fn open_read(&self, path: &Path) -> Result<impl InputStream, Error>;
+    fn open_read(&self, path: &Path) -> Result<impl InputStream + Seek, Error>;
 
     /// Open a file for writing (creates if not exists, truncates if exists).
-    fn open_write(&self, path: &Path) -> Result<impl OutputStream, Error>;
+    fn open_write(&self, path: &Path) -> Result<impl OutputStream + Seek, Error>;
 
     /// Open a file for appending.
     fn open_append(&self, path: &Path) -> Result<impl OutputStream, Error>;

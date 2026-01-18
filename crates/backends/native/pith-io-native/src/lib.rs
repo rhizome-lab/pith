@@ -1,6 +1,6 @@
 //! Native implementation of pith-io.
 
-use rhizome_pith_io::{InputStream, OutputStream, Pollable, StreamError};
+use rhizome_pith_io::{InputStream, OutputStream, Pollable, Seek, SeekFrom, StreamError};
 use std::io::{Read, Write};
 
 /// An input stream wrapping any `std::io::Read`.
@@ -39,6 +39,14 @@ impl<R: Read> InputStream for ReaderStream<R> {
     fn subscribe(&self) -> impl std::future::Future<Output = ()> {
         // For blocking readers, always ready
         std::future::ready(())
+    }
+}
+
+impl<R: std::io::Seek> Seek for ReaderStream<R> {
+    fn seek(&mut self, pos: SeekFrom) -> Result<u64, StreamError> {
+        self.inner
+            .seek(pos.into())
+            .map_err(|_| StreamError::LastOperationFailed)
     }
 }
 
@@ -86,6 +94,14 @@ impl<W: Write> OutputStream for WriterStream<W> {
     fn subscribe(&self) -> impl std::future::Future<Output = ()> {
         // For blocking writers, always ready
         std::future::ready(())
+    }
+}
+
+impl<W: std::io::Seek> Seek for WriterStream<W> {
+    fn seek(&mut self, pos: SeekFrom) -> Result<u64, StreamError> {
+        self.inner
+            .seek(pos.into())
+            .map_err(|_| StreamError::LastOperationFailed)
     }
 }
 
@@ -157,5 +173,47 @@ mod tests {
     fn always_ready_is_ready() {
         let p = AlwaysReady;
         assert!(p.ready());
+    }
+
+    #[test]
+    fn reader_stream_seek() {
+        let data = b"hello world";
+        let mut stream = ReaderStream::new(Cursor::new(data.to_vec()));
+
+        // Read first 5 bytes
+        let result = stream.read(5).unwrap();
+        assert_eq!(&result, b"hello");
+
+        // Seek back to start
+        stream.rewind().unwrap();
+        let result = stream.read(5).unwrap();
+        assert_eq!(&result, b"hello");
+
+        // Seek to position 6
+        let pos = stream.seek(SeekFrom::Start(6)).unwrap();
+        assert_eq!(pos, 6);
+        let result = stream.read(5).unwrap();
+        assert_eq!(&result, b"world");
+
+        // Get stream length
+        let len = stream.stream_len().unwrap();
+        assert_eq!(len, 11);
+
+        // Get current position
+        let pos = stream.stream_position().unwrap();
+        assert_eq!(pos, 11);
+    }
+
+    #[test]
+    fn writer_stream_seek() {
+        let mut buf = Cursor::new(vec![0u8; 11]);
+        {
+            let mut stream = WriterStream::new(&mut buf);
+            stream.write(b"hello").unwrap();
+            stream.seek(SeekFrom::Start(6)).unwrap();
+            stream.write(b"world").unwrap();
+            stream.flush().unwrap();
+        }
+        assert_eq!(buf.into_inner(), b"hello\0world".to_vec());
     }
 }

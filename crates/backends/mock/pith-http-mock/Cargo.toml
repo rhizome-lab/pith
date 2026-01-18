@@ -1,0 +1,13 @@
+[package]
+name = "rhizome-pith-http-mock"
+description = "Mock implementation of pith-http for testing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+rhizome-pith-http = { path = "../../../interfaces/pith-http" }
+
+[dev-dependencies]
+tokio = { workspace = true }

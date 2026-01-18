@@ -50,6 +50,10 @@ members = [
     "crates/backends/native/pith-sockets-native",
     "crates/backends/native/pith-sql-native",
     "crates/backends/native/pith-websocket-native",
+    # Mock backends
+    "crates/backends/mock/pith-clocks-mock",
+    "crates/backends/mock/pith-http-mock",
+    "crates/backends/mock/pith-random-mock",
     # Protocols
     "crates/protocols/pith-http1",
 ]

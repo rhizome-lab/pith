@@ -87,7 +87,7 @@ impl Cipher for Aes256Gcm {
     const TAG_SIZE: usize = 16;
 
     fn encrypt(key: &[u8], nonce: &[u8], plaintext: &[u8], aad: &[u8]) -> Result<Vec<u8>, CryptoError> {
-        use aes_gcm::{aead::Aead, Aes256Gcm as AesGcm, KeyInit, Nonce};
+        use aes_gcm::{aead::{Aead, Payload}, Aes256Gcm as AesGcm, KeyInit, Nonce};
 
         if key.len() != Self::KEY_SIZE {
             return Err(CryptoError::InvalidKeySize);
@@ -98,18 +98,15 @@ impl Cipher for Aes256Gcm {
 
         let cipher = AesGcm::new_from_slice(key).map_err(|_| CryptoError::InvalidKeySize)?;
         let nonce = Nonce::from_slice(nonce);
-
-        // For AAD, we'd need to use encrypt_in_place_detached or similar
-        // Simplified version without AAD support for now
-        let _ = aad; // TODO: support AAD
+        let payload = Payload { msg: plaintext, aad };
 
         cipher
-            .encrypt(nonce, plaintext)
+            .encrypt(nonce, payload)
             .map_err(|_| CryptoError::AuthenticationFailed)
     }
 
     fn decrypt(key: &[u8], nonce: &[u8], ciphertext: &[u8], aad: &[u8]) -> Result<Vec<u8>, CryptoError> {
-        use aes_gcm::{aead::Aead, Aes256Gcm as AesGcm, KeyInit, Nonce};
+        use aes_gcm::{aead::{Aead, Payload}, Aes256Gcm as AesGcm, KeyInit, Nonce};
 
         if key.len() != Self::KEY_SIZE {
             return Err(CryptoError::InvalidKeySize);
@@ -120,11 +117,10 @@ impl Cipher for Aes256Gcm {
 
         let cipher = AesGcm::new_from_slice(key).map_err(|_| CryptoError::InvalidKeySize)?;
         let nonce = Nonce::from_slice(nonce);
-
-        let _ = aad; // TODO: support AAD
+        let payload = Payload { msg: ciphertext, aad };
 
         cipher
-            .decrypt(nonce, ciphertext)
+            .decrypt(nonce, payload)
             .map_err(|_| CryptoError::AuthenticationFailed)
     }
 }
@@ -138,7 +134,7 @@ impl Cipher for ChaCha20Poly1305 {
     const TAG_SIZE: usize = 16;
 
     fn encrypt(key: &[u8], nonce: &[u8], plaintext: &[u8], aad: &[u8]) -> Result<Vec<u8>, CryptoError> {
-        use chacha20poly1305::{aead::Aead, ChaCha20Poly1305 as ChaCha, KeyInit, Nonce};
+        use chacha20poly1305::{aead::{Aead, Payload}, ChaCha20Poly1305 as ChaCha, KeyInit, Nonce};
 
         if key.len() != Self::KEY_SIZE {
             return Err(CryptoError::InvalidKeySize);
@@ -149,16 +145,15 @@ impl Cipher for ChaCha20Poly1305 {
 
         let cipher = ChaCha::new_from_slice(key).map_err(|_| CryptoError::InvalidKeySize)?;
         let nonce = Nonce::from_slice(nonce);
-
-        let _ = aad; // TODO: support AAD
+        let payload = Payload { msg: plaintext, aad };
 
         cipher
-            .encrypt(nonce, plaintext)
+            .encrypt(nonce, payload)
             .map_err(|_| CryptoError::AuthenticationFailed)
     }
 
     fn decrypt(key: &[u8], nonce: &[u8], ciphertext: &[u8], aad: &[u8]) -> Result<Vec<u8>, CryptoError> {
-        use chacha20poly1305::{aead::Aead, ChaCha20Poly1305 as ChaCha, KeyInit, Nonce};
+        use chacha20poly1305::{aead::{Aead, Payload}, ChaCha20Poly1305 as ChaCha, KeyInit, Nonce};
 
         if key.len() != Self::KEY_SIZE {
             return Err(CryptoError::InvalidKeySize);
@@ -169,11 +164,10 @@ impl Cipher for ChaCha20Poly1305 {
 
         let cipher = ChaCha::new_from_slice(key).map_err(|_| CryptoError::InvalidKeySize)?;
         let nonce = Nonce::from_slice(nonce);
-
-        let _ = aad; // TODO: support AAD
+        let payload = Payload { msg: ciphertext, aad };
 
         cipher
-            .decrypt(nonce, ciphertext)
+            .decrypt(nonce, payload)
             .map_err(|_| CryptoError::AuthenticationFailed)
     }
 }
@@ -283,6 +277,22 @@ mod tests {
     }
 
     #[test]
+    fn aes_gcm_aad() {
+        let key = [0u8; 32];
+        let nonce = [0u8; 12];
+        let plaintext = b"hello world";
+        let aad = b"additional data";
+
+        let ciphertext = Aes256Gcm::encrypt(&key, &nonce, plaintext, aad).unwrap();
+        let decrypted = Aes256Gcm::decrypt(&key, &nonce, &ciphertext, aad).unwrap();
+        assert_eq!(decrypted, plaintext);
+
+        // Wrong AAD should fail
+        let result = Aes256Gcm::decrypt(&key, &nonce, &ciphertext, b"wrong aad");
+        assert!(result.is_err());
+    }
+
+    #[test]
     fn chacha_roundtrip() {
         let key = [0u8; 32];
         let nonce = [0u8; 12];
@@ -292,6 +302,22 @@ mod tests {
         let decrypted = ChaCha20Poly1305::decrypt(&key, &nonce, &ciphertext, &[]).unwrap();
 
         assert_eq!(decrypted, plaintext);
+    }
+
+    #[test]
+    fn chacha_aad() {
+        let key = [0u8; 32];
+        let nonce = [0u8; 12];
+        let plaintext = b"hello world";
+        let aad = b"additional data";
+
+        let ciphertext = ChaCha20Poly1305::encrypt(&key, &nonce, plaintext, aad).unwrap();
+        let decrypted = ChaCha20Poly1305::decrypt(&key, &nonce, &ciphertext, aad).unwrap();
+        assert_eq!(decrypted, plaintext);
+
+        // Wrong AAD should fail
+        let result = ChaCha20Poly1305::decrypt(&key, &nonce, &ciphertext, b"wrong aad");
+        assert!(result.is_err());
     }
 
     #[test]
