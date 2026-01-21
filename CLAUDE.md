@@ -79,3 +79,17 @@ When making scope decisions (adding/removing interfaces, deferring to ecosystem 
 | Change scope/philosophy | `docs/RECOMMENDATIONS.md` ("What Pith Is/Is Not"), `crates/pith/src/lib.rs` |
 
 The `rhizome-pith` meta-crate (`crates/pith/src/lib.rs`) is the public-facing docs.rs documentation - keep it in sync with recommendations.
+
+## Commit Convention
+
+Use conventional commits: `type(scope): message`
+
+Types:
+- `feat` - New feature
+- `fix` - Bug fix
+- `refactor` - Code change that neither fixes a bug nor adds a feature
+- `docs` - Documentation only
+- `chore` - Maintenance (deps, CI, etc.)
+- `test` - Adding or updating tests
+
+Scope is optional but recommended for multi-crate repos.
