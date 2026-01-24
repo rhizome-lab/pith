@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-The initial `pith-cli` interface defined stdio traits with `&self`:
+The initial `portals-cli` interface defined stdio traits with `&self`:
 
 ```rust
 pub trait Stdin {

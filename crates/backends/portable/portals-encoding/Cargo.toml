@@ -1,0 +1,11 @@
+[package]
+name = "rhizome-pith-encoding-portable"
+description = "Portable implementation of pith-encoding (works on native and WASM)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+rhizome-rhi-portals-encoding = { path = "../../../interfaces/pith-encoding" }
+base64 = "0.22"

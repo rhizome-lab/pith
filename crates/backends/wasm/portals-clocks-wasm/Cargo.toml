@@ -1,0 +1,21 @@
+[package]
+name = "rhizome-pith-clocks-wasm"
+description = "WASM implementation of pith-clocks"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+rhizome-rhi-portals-clocks = { path = "../../../interfaces/pith-clocks" }
+js-sys = "0.3"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+gloo-timers = { version = "0.3", features = ["futures"] }
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["Window", "Performance"]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

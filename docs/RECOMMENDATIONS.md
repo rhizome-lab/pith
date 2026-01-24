@@ -38,27 +38,27 @@ These have multiple viable options. We're not picking winners yet.
 3. **No portability benefit** - same impl everywhere
 4. **Maintenance burden** - tracking upstream changes
 
-## What Pith Is
+## What Portals Is
 
-Pith provides **WASI-inspired capability primitives**: low-level building blocks that vary by platform and benefit from abstraction.
+Portals provides **WASI-inspired capability primitives**: low-level building blocks that vary by platform and benefit from abstraction.
 
 - **Capability abstractions** - traits for fs, io, sockets, clocks, random
 - **Contested infrastructure** - blessed choices for http, sql, caching where ecosystem is fragmented
 - **Portability** - same interface across native, WASM, embedded
 - **Wire format parsers** - protocol implementations (HTTP/1.1) that backends can share
 
-## What Pith Is Not
+## What Portals Is Not
 
-Pith does not try to:
+Portals does not try to:
 - **Wrap solved domains** - use serde, clap, regex directly
 - **Abstract stylistic choices** - error handling style, parser combinator preference
 - **Replace the ecosystem** - we complement it, not compete with it
-- **Be a framework** - pith is à la carte, pick what you need
+- **Be a framework** - portals is à la carte, pick what you need
 - **Wrap application protocols** - LSP, MCP, gRPC are frameworks for building specific kinds of servers, not capability primitives
 
 ### Capability Primitives vs Application Protocols
 
-Pith focuses on **capability primitives** - things like clocks, filesystems, sockets, randomness. These:
+Portals focuses on **capability primitives** - things like clocks, filesystems, sockets, randomness. These:
 - Vary by platform (native vs WASM vs embedded)
 - Have no ambient authority (capability-based security)
 - Are low-level building blocks, not complete solutions
@@ -69,7 +69,7 @@ Pith focuses on **capability primitives** - things like clocks, filesystems, soc
 - They have clear ecosystem winners or official SDKs
 - They operate at a higher abstraction level
 
-The boundary: if it's in WASI or could be, it might belong in pith. If it's a framework for a specific application domain, use the ecosystem solution.
+The boundary: if it's in WASI or could be, it might belong in portals. If it's a framework for a specific application domain, use the ecosystem solution.
 
 The goal is reducing decision fatigue for *capabilities and infrastructure*, not becoming "the one true Rust stack."
 

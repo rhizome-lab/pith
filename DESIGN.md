@@ -1,6 +1,6 @@
 # Design Guidelines
 
-Principles and conventions for pith interfaces.
+Principles and conventions for portals interfaces.
 
 ## Core Philosophy
 
@@ -10,7 +10,7 @@ Principles and conventions for pith interfaces.
 
 ## Capability-Based Design
 
-Pith follows the capability-based security model, inspired by WASI. This is a core principle, not optional.
+Portals follows the capability-based security model, inspired by WASI. This is a core principle, not optional.
 
 ### The Rule
 
@@ -52,17 +52,17 @@ impl SqliteConnection {
 
 ## Interface Categories
 
-Pith's value varies by domain. The goal is **reducing decision fatigue** while providing **consistent APIs**.
+Portals's value varies by domain. The goal is **reducing decision fatigue** while providing **consistent APIs**.
 
 ### Primitives (high value)
 
 Fundamental capabilities where abstraction enables portability and testability:
 
-- `rhizome-pith-clocks` - time
-- `rhizome-pith-random` - randomness
-- `rhizome-pith-filesystem` - file I/O
-- `rhizome-pith-io` - streams
-- `rhizome-pith-sockets` - raw networking
+- `rhizome-portals-clocks` - time
+- `rhizome-portals-random` - randomness
+- `rhizome-portals-filesystem` - file I/O
+- `rhizome-portals-io` - streams
+- `rhizome-portals-sockets` - raw networking
 
 These have genuinely different implementations across platforms (native, WASM, embedded). The abstraction is the value.
 
@@ -70,7 +70,7 @@ These have genuinely different implementations across platforms (native, WASM, e
 
 Areas where the Rust ecosystem has multiple viable options and no clear winner:
 
-| Domain | Ecosystem fragmentation | Pith's role |
+| Domain | Ecosystem fragmentation | Portals's role |
 |--------|------------------------|-------------|
 | HTTP client | reqwest, ureq, hyper, surf | Pick one, consistent API |
 | Datetime | chrono, time | Pick one, consistent API |
@@ -79,20 +79,20 @@ Areas where the Rust ecosystem has multiple viable options and no clear winner:
 | SQL | rusqlite, sqlx, diesel | Abstract over them |
 | Caching | many options | Provide standard interface |
 
-Here pith's value is **the decision itself** plus API consistency with other pith crates. The interface may be thin over the chosen library.
+Here portals's value is **the decision itself** plus API consistency with other portals crates. The interface may be thin over the chosen library.
 
 ### Solved domains (low value - defer)
 
 Areas where ecosystem consensus already exists:
 
-| Domain | Ecosystem standard | Pith's role |
+| Domain | Ecosystem standard | Portals's role |
 |--------|-------------------|-------------|
 | Serialization | serde | Don't wrap, just use serde |
 | CLI parsing | clap | Don't wrap, just use clap |
 | URL parsing | url | Don't wrap, just use url |
 | Regex | regex | Don't wrap, just use regex |
 
-Creating pith wrappers here adds friction without benefit. Users already know these APIs.
+Creating portals wrappers here adds friction without benefit. Users already know these APIs.
 
 ### Guidelines
 

@@ -1,4 +1,4 @@
-# Pith
+# Portals
 
 Standard library interfaces.
 
@@ -8,22 +8,22 @@ Capability-based, async-first interfaces inspired by WASI, designed to be implem
 
 | Crate | Description | WASI Equivalent |
 |-------|-------------|-----------------|
-| `pith-clocks` | Wall clock, monotonic clock | `wasi:clocks` |
-| `pith-cli` | Args, environment, stdio | `wasi:cli` |
-| `pith-crypto` | Hashing, HMAC, encryption, signatures | - |
-| `pith-encoding` | Base64, hex, URL encoding | - |
-| `pith-filesystem` | Files, directories | `wasi:filesystem` |
-| `pith-http` | HTTP client/server | `wasi:http` |
-| `pith-io` | Streams, polling | `wasi:io` |
-| `pith-random` | Secure and insecure RNG | `wasi:random` |
-| `pith-sockets` | TCP, UDP, DNS | `wasi:sockets` |
-| `pith-sql` | Database connections, queries | - |
+| `portals-clocks` | Wall clock, monotonic clock | `wasi:clocks` |
+| `portals-cli` | Args, environment, stdio | `wasi:cli` |
+| `portals-crypto` | Hashing, HMAC, encryption, signatures | - |
+| `portals-encoding` | Base64, hex, URL encoding | - |
+| `portals-filesystem` | Files, directories | `wasi:filesystem` |
+| `portals-http` | HTTP client/server | `wasi:http` |
+| `portals-io` | Streams, polling | `wasi:io` |
+| `portals-random` | Secure and insecure RNG | `wasi:random` |
+| `portals-sockets` | TCP, UDP, DNS | `wasi:sockets` |
+| `portals-sql` | Database connections, queries | - |
 
 ## Structure
 
 ```
 crates/
-├── interfaces/     # Trait definitions (pith-*)
+├── interfaces/     # Trait definitions (portals-*)
 └── backends/       # Implementations
     ├── native/     # Native OS implementations
     └── wasm/       # WASM implementations

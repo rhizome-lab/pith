@@ -6,7 +6,7 @@ Proposed
 
 ## Context
 
-Several pith interfaces have async methods:
+Several portals interfaces have async methods:
 - `MonotonicClock::subscribe_duration` / `subscribe_instant`
 - `InputStream::subscribe`, `OutputStream::subscribe`
 - `TcpConnect::connect`, `TcpListener::accept`, etc.
@@ -18,7 +18,7 @@ These return `impl Future<Output = T>`. For native backends, implementing these 
 1. **Runtime-agnostic**: Use only `std::future` primitives, let caller provide runtime
 2. **Tokio dependency**: Native backends depend on tokio
 3. **Feature flags**: `tokio`, `async-std`, `smol` features select runtime
-4. **Separate crates**: `pith-clocks-native-tokio`, `pith-clocks-native-async-std`
+4. **Separate crates**: `portals-clocks-native-tokio`, `portals-clocks-native-async-std`
 
 ## Decision
 

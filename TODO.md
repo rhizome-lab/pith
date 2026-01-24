@@ -5,16 +5,16 @@
 1. [x] Diverge from WASI where ergonomics warrant
 2. [x] Add more interfaces (crypto, encoding, sql)
 3. [x] Reference implementations for native targets
-4. [x] Unified streams (filesystem returns `pith-io` streams)
+4. [x] Unified streams (filesystem returns `portals-io` streams)
 5. [x] WebSocket and DNS interfaces + native backends
-   - [x] pith-websocket interface + pith-websocket-native (via tungstenite)
-   - [x] pith-dns interface + pith-dns-native (via hickory-resolver)
+   - [x] portals-websocket interface + portals-websocket-native (via tungstenite)
+   - [x] portals-dns interface + portals-dns-native (via hickory-resolver)
 6. [x] Protocol implementations (`crates/protocols/`)
-   - [x] pith-http1 (HTTP/1.1 wire format parsing/serialization)
+   - [x] portals-http1 (HTTP/1.1 wire format parsing/serialization)
 7. [x] Mock backends for testing (`crates/backends/mock/`)
-   - [x] pith-clocks-mock (controllable wall/monotonic clocks)
-   - [x] pith-random-mock (deterministic secure/insecure random)
-   - [x] pith-http-mock (request recording, response queuing)
+   - [x] portals-clocks-mock (controllable wall/monotonic clocks)
+   - [x] portals-random-mock (deterministic secure/insecure random)
+   - [x] portals-http-mock (request recording, response queuing)
 8. [x] Crypto AAD support (AES-GCM, ChaCha20-Poly1305)
 
 ## Backlog
@@ -24,77 +24,77 @@
 See [ADR-0004](docs/adr/0004-capability-audit.md) for full audit results.
 
 **Summary**: All 23 interfaces now compliant. Fixed violations:
-- [x] pith-sockets - removed `TcpListen::bind()`, `UdpSocket::bind()`; renamed to `TcpListener`
-- [x] pith-blobstore - removed `BlobStore` trait, kept `Container`
-- [x] pith-websocket - removed `WebSocketConnector` trait, kept `WebSocketClient`
-- [x] pith-messaging - removed `Messaging` trait, kept `Channel`/`Topic`/`Sender`/`Receiver`
+- [x] portals-sockets - removed `TcpListen::bind()`, `UdpSocket::bind()`; renamed to `TcpListener`
+- [x] portals-blobstore - removed `BlobStore` trait, kept `Container`
+- [x] portals-websocket - removed `WebSocketConnector` trait, kept `WebSocketClient`
+- [x] portals-messaging - removed `Messaging` trait, kept `Channel`/`Topic`/`Sender`/`Receiver`
 
 ### WASI Phase 1/2 interfaces
 
-- [x] **pith-url** - URL parsing (WASI Phase 1)
-- [x] **pith-timezone** - timezone handling (WASI Phase 2)
-- [x] **pith-config** - runtime configuration (WASI Phase 1)
-- [x] **pith-logging** - structured logging (WASI Phase 1)
-- [x] **pith-keyvalue** - key-value store (WASI Phase 1)
-- [x] **pith-blobstore** - blob storage (WASI Phase 1)
-- [x] **pith-observe** - observability/telemetry (WASI Phase 1)
-- [x] **pith-messaging** - message queues (WASI Phase 1)
+- [x] **portals-url** - URL parsing (WASI Phase 1)
+- [x] **portals-timezone** - timezone handling (WASI Phase 2)
+- [x] **portals-config** - runtime configuration (WASI Phase 1)
+- [x] **portals-logging** - structured logging (WASI Phase 1)
+- [x] **portals-keyvalue** - key-value store (WASI Phase 1)
+- [x] **portals-blobstore** - blob storage (WASI Phase 1)
+- [x] **portals-observe** - observability/telemetry (WASI Phase 1)
+- [x] **portals-messaging** - message queues (WASI Phase 1)
 
 ### Unstable / Deferred
 
 APIs likely to change or too platform-specific:
 
-- **pith-nn** - neural network inference (WASI Phase 2, ML APIs evolving fast)
-- **pith-gfx** - graphics (WASI Phase 2, graphics APIs notoriously unstable)
-- **pith-threads** - threading (WASI Phase 1, complex semantics)
-- **pith-i2c / pith-spi / pith-usb** - hardware interfaces (niche, platform-specific)
-- **pith-distributed-lock** - distributed locking (niche)
+- **portals-nn** - neural network inference (WASI Phase 2, ML APIs evolving fast)
+- **portals-gfx** - graphics (WASI Phase 2, graphics APIs notoriously unstable)
+- **portals-threads** - threading (WASI Phase 1, complex semantics)
+- **portals-i2c / portals-spi / portals-usb** - hardware interfaces (niche, platform-specific)
+- **portals-distributed-lock** - distributed locking (niche)
 
 ## Potential Interfaces
 
 Application-level interfaces to consider (beyond WASI):
 
 ### Identity / Auth
-- **pith-jwt** - JWT parsing/validation/creation
-- **pith-oauth** - OAuth flow abstractions
-- **pith-session** - session management
+- **portals-jwt** - JWT parsing/validation/creation
+- **portals-oauth** - OAuth flow abstractions
+- **portals-session** - session management
 
 ### Data / Validation
-- **pith-cache** - caching with TTL/LRU policies
-- **pith-validation** - schema validation
-- **pith-serialization** - JSON/TOML/YAML/etc (or per-format crates)
+- **portals-cache** - caching with TTL/LRU policies
+- **portals-validation** - schema validation
+- **portals-serialization** - JSON/TOML/YAML/etc (or per-format crates)
 
 ### Text / Formatting
-- **pith-i18n** - internationalization/localization
-- **pith-markdown** - markdown parsing/rendering
-- **pith-template** - templating
+- **portals-i18n** - internationalization/localization
+- **portals-markdown** - markdown parsing/rendering
+- **portals-template** - templating
 
 ### Media
-- **pith-image** - image metadata/transforms
-- **pith-audio** - audio metadata/processing
-- **pith-video** - video metadata
+- **portals-image** - image metadata/transforms
+- **portals-audio** - audio metadata/processing
+- **portals-video** - video metadata
 
 ### Communication
-- **pith-email** - email sending/parsing
-- **pith-notification** - push notifications
+- **portals-email** - email sending/parsing
+- **portals-notification** - push notifications
 
 ### Identifiers
-- **pith-uuid** - UUID generation/parsing
-- **pith-nanoid** - nanoid generation
-- **pith-snowflake** - snowflake IDs
+- **portals-uuid** - UUID generation/parsing
+- **portals-nanoid** - nanoid generation
+- **portals-snowflake** - snowflake IDs
 
 ### Scheduling
-- **pith-cron** - cron expressions/scheduling
-- **pith-delay** - delayed/scheduled tasks
+- **portals-cron** - cron expressions/scheduling
+- **portals-delay** - delayed/scheduled tasks
 
 ### no_std Primitives
-- **pith-collections** - portable collections
-- **pith-sync** - sync primitives (mutex, rwlock, etc)
-- **pith-alloc** - allocator interfaces
+- **portals-collections** - portable collections
+- **portals-sync** - sync primitives (mutex, rwlock, etc)
+- **portals-alloc** - allocator interfaces
 
 ## Future Considerations
 
-- **`spore-pith`**: Lua bindings (belongs in Spore, not here)
+- **`spore-portals`**: Lua bindings (belongs in Spore, not here)
 
 Potential interface improvements to consider later:
 

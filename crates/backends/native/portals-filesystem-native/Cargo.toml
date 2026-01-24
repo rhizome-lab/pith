@@ -1,0 +1,11 @@
+[package]
+name = "rhizome-pith-filesystem-native"
+description = "Native implementation of pith-filesystem"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+rhizome-rhi-portals-filesystem = { path = "../../../interfaces/pith-filesystem" }
+rhizome-rhi-portals-io-native = { path = "../pith-io-native" }

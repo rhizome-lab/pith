@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-Pith follows capability-based design: interfaces never acquire resources by path/name - they receive pre-opened handles from the host. This audit examines all 23 interfaces for compliance.
+Portals follows capability-based design: interfaces never acquire resources by path/name - they receive pre-opened handles from the host. This audit examines all 23 interfaces for compliance.
 
 ## Audit Results
 
@@ -14,28 +14,28 @@ Pith follows capability-based design: interfaces never acquire resources by path
 
 | Interface | Notes |
 |-----------|-------|
-| pith-filesystem | Pre-opened `Directory` capability, all paths relative |
-| pith-http | `HttpClient`/`HttpHandler` use `&self` |
-| pith-keyvalue | No `open_store()`, operates on received capability |
-| pith-dns | `Resolver` uses `&self` |
-| pith-config | `Config` uses `&self` |
-| pith-cache | `Cache` uses `&self` |
-| pith-observe | All traits use `&self` |
-| pith-clocks | Uses `&self` |
-| pith-io | Uses `&self`/`&mut self` |
-| pith-random | Uses `&self`/`&mut self` |
-| pith-logging | Uses `&self` |
-| pith-sql | Explicitly documented as capability-based |
-| pith-nanoid | Uses `&self` |
-| pith-snowflake | Uses `&self` |
-| pith-cron | Uses `&self` |
-| pith-markdown | Uses `&self` |
-| pith-encoding | Pure functions (no resource acquisition) |
-| pith-crypto | Pure algorithms (no resource acquisition) |
+| portals-filesystem | Pre-opened `Directory` capability, all paths relative |
+| portals-http | `HttpClient`/`HttpHandler` use `&self` |
+| portals-keyvalue | No `open_store()`, operates on received capability |
+| portals-dns | `Resolver` uses `&self` |
+| portals-config | `Config` uses `&self` |
+| portals-cache | `Cache` uses `&self` |
+| portals-observe | All traits use `&self` |
+| portals-clocks | Uses `&self` |
+| portals-io | Uses `&self`/`&mut self` |
+| portals-random | Uses `&self`/`&mut self` |
+| portals-logging | Uses `&self` |
+| portals-sql | Explicitly documented as capability-based |
+| portals-nanoid | Uses `&self` |
+| portals-snowflake | Uses `&self` |
+| portals-cron | Uses `&self` |
+| portals-markdown | Uses `&self` |
+| portals-encoding | Pure functions (no resource acquisition) |
+| portals-crypto | Pure algorithms (no resource acquisition) |
 
 ### Violations (4 interfaces)
 
-#### 1. pith-sockets
+#### 1. portals-sockets
 
 **Violation**: Static `bind()` methods allow ambient authority.
 
@@ -53,7 +53,7 @@ pub trait UdpSocket {
 
 **Note**: `TcpConnect::connect(&self, addr)` is already correct - requires capability.
 
-#### 2. pith-blobstore
+#### 2. portals-blobstore
 
 **Violation**: Opens containers by name within the interface.
 
@@ -65,7 +65,7 @@ pub trait BlobStore {
 }
 ```
 
-#### 3. pith-websocket
+#### 3. portals-websocket
 
 **Violation**: Connects by URL string.
 
@@ -76,7 +76,7 @@ pub trait WebSocketConnector {
 }
 ```
 
-#### 4. pith-messaging
+#### 4. portals-messaging
 
 **Violation**: Gets topics by name.
 
@@ -89,7 +89,7 @@ pub trait Messaging {
 
 ### Borderline Cases
 
-#### pith-timezone
+#### portals-timezone
 
 ```rust
 pub fn get(name: &str) -> Result<TimeZone, Error>
@@ -108,7 +108,7 @@ This looks up timezones by IANA name. However:
 
 Move all resource acquisition to backends.
 
-**pith-sockets**:
+**portals-sockets**:
 ```rust
 // Interface - only operations on existing sockets
 pub trait TcpListener {
@@ -122,7 +122,7 @@ impl NativeTcpListener {
 }
 ```
 
-**pith-blobstore**:
+**portals-blobstore**:
 ```rust
 // Interface - only Container operations
 pub trait Container {
@@ -133,7 +133,7 @@ pub trait Container {
 // Remove BlobStore trait entirely, or make it backend-only
 ```
 
-**pith-websocket**:
+**portals-websocket**:
 ```rust
 // Interface - only WebSocketClient operations
 pub trait WebSocketClient {
@@ -147,7 +147,7 @@ impl NativeWebSocketClient {
 }
 ```
 
-**pith-messaging**:
+**portals-messaging**:
 ```rust
 // Interface - only Sender/Receiver/Topic operations
 pub trait Topic {
@@ -228,10 +228,10 @@ A `BlobStore` capability that opens any container by name is a "god object" - to
 
 | Interface | Remove | Keep |
 |-----------|--------|------|
-| pith-sockets | `TcpListen::bind()` (renamed trait to `TcpListener`), `UdpSocket::bind()` | `TcpListener`, `TcpStream`, `UdpSocket` (as instance trait) |
-| pith-blobstore | `BlobStore` trait | `Container` trait |
-| pith-websocket | `WebSocketConnector` trait | `WebSocketClient` trait |
-| pith-messaging | `Messaging` trait | `Channel`, `Topic`, `Sender`, `Receiver` traits |
+| portals-sockets | `TcpListen::bind()` (renamed trait to `TcpListener`), `UdpSocket::bind()` | `TcpListener`, `TcpStream`, `UdpSocket` (as instance trait) |
+| portals-blobstore | `BlobStore` trait | `Container` trait |
+| portals-websocket | `WebSocketConnector` trait | `WebSocketClient` trait |
+| portals-messaging | `Messaging` trait | `Channel`, `Topic`, `Sender`, `Receiver` traits |
 
 Backend crates provide constructors. Interfaces define operations on opened resources.
 
@@ -239,4 +239,4 @@ Backend crates provide constructors. Interfaces define operations on opened reso
 
 - DESIGN.md "Capability-Based Design" section
 - WASI sockets proposal
-- pith-sql refactoring (removed `Database::open`, kept `Connection`)
+- portals-sql refactoring (removed `Database::open`, kept `Connection`)

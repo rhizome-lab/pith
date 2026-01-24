@@ -1,0 +1,11 @@
+[package]
+name = "rhizome-pith-markdown-native"
+description = "Native Markdown implementation using pulldown-cmark"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+rhizome-rhi-portals-markdown = { path = "../../../interfaces/pith-markdown" }
+pulldown-cmark = "0.12"

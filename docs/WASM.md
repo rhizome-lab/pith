@@ -1,6 +1,6 @@
 # WASM Backend Strategy
 
-WASM backends implement pith interfaces for browser and WASI environments. This document tracks implementation status and priority.
+WASM backends implement portals interfaces for browser and WASI environments. This document tracks implementation status and priority.
 
 ## Implementation Tiers
 
@@ -10,11 +10,11 @@ These interfaces have direct browser API equivalents.
 
 | Interface | WASM Strategy | Status |
 |-----------|---------------|--------|
-| `pith-clocks` | `js-sys` Date, `performance.now()`, `gloo-timers` | Done |
-| `pith-random` | `getrandom` with `wasm_js` feature | Done |
-| `pith-http` | Fetch API via `gloo-net` | Done |
-| `pith-websocket` | WebSocket API via `gloo-net` | Done |
-| `pith-logging` | `console.*` via `web-sys` | Done |
+| `portals-clocks` | `js-sys` Date, `performance.now()`, `gloo-timers` | Done |
+| `portals-random` | `getrandom` with `wasm_js` feature | Done |
+| `portals-http` | Fetch API via `gloo-net` | Done |
+| `portals-websocket` | WebSocket API via `gloo-net` | Done |
+| `portals-logging` | `console.*` via `web-sys` | Done |
 
 ### Portable (works on native and WASM)
 
@@ -22,8 +22,8 @@ These are in `crates/backends/portable/` and work everywhere.
 
 | Interface | Backend | Notes |
 |-----------|---------|-------|
-| `pith-encoding` | `pith-encoding-portable` | `base64` crate is pure Rust |
-| `pith-cron` | `pith-cron-portable` | Pure Rust parsing |
+| `portals-encoding` | `portals-encoding-portable` | `base64` crate is pure Rust |
+| `portals-cron` | `portals-cron-portable` | Pure Rust parsing |
 
 ### May work in WASM (untested)
 
@@ -31,8 +31,8 @@ These native backends might compile to WASM but haven't been tested.
 
 | Interface | Notes |
 |-----------|-------|
-| `pith-nanoid` | Uses `nanoid` crate (needs WASM-compatible randomness) |
-| `pith-snowflake` | Uses `SystemTime` (needs clock injection for WASM) |
+| `portals-nanoid` | Uses `nanoid` crate (needs WASM-compatible randomness) |
+| `portals-snowflake` | Uses `SystemTime` (needs clock injection for WASM) |
 
 ### Tier 2: Needs design decisions
 
@@ -40,11 +40,11 @@ These require architectural choices about how to handle WASM limitations.
 
 | Interface | Challenge | Potential Strategy |
 |-----------|-----------|-------------------|
-| `pith-filesystem` | No real FS in browser | IndexedDB, in-memory, or OPFS |
-| `pith-cache` | Persistence options vary | LocalStorage, IndexedDB, or in-memory |
-| `pith-keyvalue` | Multiple storage backends | LocalStorage, IndexedDB |
-| `pith-crypto` | SubtleCrypto is async-only | Wrap SubtleCrypto, handle async mismatch |
-| `pith-timezone` | Need timezone database | `js-sys` Intl API or bundled tzdata |
+| `portals-filesystem` | No real FS in browser | IndexedDB, in-memory, or OPFS |
+| `portals-cache` | Persistence options vary | LocalStorage, IndexedDB, or in-memory |
+| `portals-keyvalue` | Multiple storage backends | LocalStorage, IndexedDB |
+| `portals-crypto` | SubtleCrypto is async-only | Wrap SubtleCrypto, handle async mismatch |
+| `portals-timezone` | Need timezone database | `js-sys` Intl API or bundled tzdata |
 
 ### Tier 3: WASM limitations
 
@@ -52,12 +52,12 @@ These interfaces have fundamental limitations in browser WASM.
 
 | Interface | Limitation | Options |
 |-----------|------------|---------|
-| `pith-sockets` | No raw TCP/UDP in browser | WebSocket-only, or server proxy |
-| `pith-dns` | No direct DNS access | Server-backed API, or skip |
-| `pith-sql` | No native SQLite | `sql.js` (SQLite compiled to WASM) |
-| `pith-blobstore` | Cloud APIs need server | Server proxy, or mock-only |
-| `pith-messaging` | Queue systems need server | Server proxy, or mock-only |
-| `pith-observe` | Telemetry needs backend | Beacon API, or server proxy |
+| `portals-sockets` | No raw TCP/UDP in browser | WebSocket-only, or server proxy |
+| `portals-dns` | No direct DNS access | Server-backed API, or skip |
+| `portals-sql` | No native SQLite | `sql.js` (SQLite compiled to WASM) |
+| `portals-blobstore` | Cloud APIs need server | Server proxy, or mock-only |
+| `portals-messaging` | Queue systems need server | Server proxy, or mock-only |
+| `portals-observe` | Telemetry needs backend | Beacon API, or server proxy |
 
 ### Tier 4: Skip or mock-only
 
@@ -65,7 +65,7 @@ Some interfaces don't make sense in browser WASM. Provide mocks for testing only
 
 | Interface | Reason |
 |-----------|--------|
-| `pith-config` | Environment variables don't exist in browser |
+| `portals-config` | Environment variables don't exist in browser |
 
 ## WASI vs Browser WASM
 

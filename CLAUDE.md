@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Pith is a standard library of interfaces, inspired by WASI.
+Portals is a standard library of interfaces, inspired by WASI.
 
 ## Structure
 
@@ -58,7 +58,7 @@ From ecosystem-wide session analysis:
 ## Design
 
 - **Capability-based first**: No ambient authority. Interfaces never acquire resources by path/name - they receive pre-opened handles from the host. If you see `open(path: &str)` in an interface, it's wrong.
-- **WASI-inspired scope**: Pith covers capability primitives (clocks, fs, sockets, random) and contested infrastructure (http, sql). It does *not* wrap application protocols (LSP, MCP, gRPC) - use ecosystem solutions for those.
+- **WASI-inspired scope**: Portals covers capability primitives (clocks, fs, sockets, random) and contested infrastructure (http, sql). It does *not* wrap application protocols (LSP, MCP, gRPC) - use ecosystem solutions for those.
 - Interfaces define traits, backends provide implementations
 - Async-first where blocking is possible
 - Mirror WASI structure but diverge for ergonomics where sensible
@@ -76,7 +76,7 @@ When making scope decisions (adding/removing interfaces, deferring to ecosystem 
 | Remove interface / defer to ecosystem | `docs/RECOMMENDATIONS.md` (solved domains table), `crates/pith/src/lib.rs` (docs) |
 | Add to "watching" list | `docs/RECOMMENDATIONS.md` (contested domains table) |
 | Change design guidelines | `DESIGN.md` |
-| Change scope/philosophy | `docs/RECOMMENDATIONS.md` ("What Pith Is/Is Not"), `crates/pith/src/lib.rs` |
+| Change scope/philosophy | `docs/RECOMMENDATIONS.md` ("What Portals Is/Is Not"), `crates/pith/src/lib.rs` |
 
 The `rhizome-pith` meta-crate (`crates/pith/src/lib.rs`) is the public-facing docs.rs documentation - keep it in sync with recommendations.
 
