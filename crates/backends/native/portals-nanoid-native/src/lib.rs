@@ -1,6 +1,6 @@
 //! Native nanoid implementation using the nanoid crate.
 
-use rhi_portals_nanoid::NanoId;
+use portals_nanoid::NanoId;
 
 /// Nanoid generator using the nanoid crate.
 #[derive(Debug, Default, Clone, Copy)]

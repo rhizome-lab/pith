@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-logging-wasm"
+name = "portals-logging-wasm"
 description = "WASM implementation of portals-logging"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-logging = { path = "../../../interfaces/portals-logging" }
+portals-logging = { path = "../../../interfaces/portals-logging" }
 
 [dependencies.web-sys]
 version = "0.3"

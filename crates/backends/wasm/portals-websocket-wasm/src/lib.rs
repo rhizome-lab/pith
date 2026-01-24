@@ -4,7 +4,7 @@
 
 use futures::StreamExt;
 use gloo_net::websocket::futures::WebSocket;
-use rhi_portals_websocket::{Error, Message, WebSocketClient};
+use portals_websocket::{Error, Message, WebSocketClient};
 
 /// WebSocket client using the browser WebSocket API.
 pub struct BrowserWebSocket {

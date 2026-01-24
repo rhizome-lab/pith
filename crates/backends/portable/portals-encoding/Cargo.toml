@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-encoding-portable"
+name = "portals-encoding-portable"
 description = "Portable implementation of portals-encoding (works on native and WASM)"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-encoding = { path = "../../../interfaces/portals-encoding" }
+portals-encoding = { path = "../../../interfaces/portals-encoding" }
 base64 = "0.22"

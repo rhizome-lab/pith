@@ -3,7 +3,7 @@
 //! Uses the Fetch API via `gloo-net`.
 
 use gloo_net::http::RequestBuilder;
-use rhi_portals_http::{Error, HttpClient, Method, Request, Response};
+use portals_http::{Error, HttpClient, Method, Request, Response};
 use std::collections::HashMap;
 
 /// HTTP client using the Fetch API.

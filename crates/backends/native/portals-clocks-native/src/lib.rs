@@ -1,6 +1,6 @@
 //! Native implementation of portals-clocks.
 
-use rhi_portals_clocks::{MonotonicClock, WallClock};
+use portals_clocks::{MonotonicClock, WallClock};
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
 /// Wall clock using system time.

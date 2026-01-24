@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-cron-portable"
+name = "portals-cron-portable"
 description = "Portable cron expression implementation (works on native and WASM)"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-cron = { path = "../../../interfaces/portals-cron" }
+portals-cron = { path = "../../../interfaces/portals-cron" }

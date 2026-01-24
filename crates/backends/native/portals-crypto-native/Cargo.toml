@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-crypto-native"
+name = "portals-crypto-native"
 description = "Native implementation of portals-crypto"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-crypto = { path = "../../../interfaces/portals-crypto" }
+portals-crypto = { path = "../../../interfaces/portals-crypto" }
 sha2 = "0.10"
 hmac = "0.12"
 aes-gcm = "0.10"

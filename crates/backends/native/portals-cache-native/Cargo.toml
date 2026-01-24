@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-cache-native"
+name = "portals-cache-native"
 description = "Native in-memory cache implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-cache = { path = "../../../interfaces/portals-cache" }
+portals-cache = { path = "../../../interfaces/portals-cache" }

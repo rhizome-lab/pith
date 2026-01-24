@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-cron"
+name = "portals-cron"
 description = "Cron expression interfaces"
 version.workspace = true
 edition.workspace = true

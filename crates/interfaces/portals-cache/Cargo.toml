@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-cache"
+name = "portals-cache"
 description = "Cache interfaces"
 version.workspace = true
 edition.workspace = true

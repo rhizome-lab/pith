@@ -1,6 +1,6 @@
 //! Native implementation of portals-crypto using RustCrypto.
 
-use rhi_portals_crypto::{Cipher, CryptoError, Hash, Hmac, Kdf, Signature};
+use portals_crypto::{Cipher, CryptoError, Hash, Hmac, Kdf, Signature};
 
 // ============================================================================
 // Hashing

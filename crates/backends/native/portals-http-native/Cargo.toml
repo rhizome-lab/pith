@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-http-native"
+name = "portals-http-native"
 description = "Native implementation of portals-http"
 version.workspace = true
 edition.workspace = true
@@ -7,6 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-http = { path = "../../../interfaces/portals-http" }
+portals-http = { path = "../../../interfaces/portals-http" }
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
 tokio = { workspace = true }

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-messaging-native"
+name = "portals-messaging-native"
 description = "Native message queue implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-messaging = { path = "../../../interfaces/portals-messaging" }
+portals-messaging = { path = "../../../interfaces/portals-messaging" }
 tokio = { workspace = true, features = ["sync", "time"] }
 
 [dev-dependencies]

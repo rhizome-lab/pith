@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-clocks-wasm"
+name = "portals-clocks-wasm"
 description = "WASM implementation of portals-clocks"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-clocks = { path = "../../../interfaces/portals-clocks" }
+portals-clocks = { path = "../../../interfaces/portals-clocks" }
 js-sys = "0.3"
 wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"

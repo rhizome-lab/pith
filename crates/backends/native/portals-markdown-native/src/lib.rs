@@ -1,6 +1,6 @@
 //! Native Markdown implementation using pulldown-cmark.
 
-use rhi_portals_markdown::{MarkdownDocument, MarkdownOptions, MarkdownParser, MarkdownRenderer};
+use portals_markdown::{MarkdownDocument, MarkdownOptions, MarkdownParser, MarkdownRenderer};
 use pulldown_cmark::{html, Event, HeadingLevel, Options, Parser, Tag, TagEnd};
 
 /// Markdown renderer using pulldown-cmark.

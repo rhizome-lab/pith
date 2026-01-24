@@ -3,7 +3,7 @@
 //! Provides `MemoryBlobStore` for creating and managing containers,
 //! and `MemoryContainer` which implements the `Container` trait.
 
-use rhi_portals_blobstore::{Container, Error, ObjectMeta};
+use portals_blobstore::{Container, Error, ObjectMeta};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 

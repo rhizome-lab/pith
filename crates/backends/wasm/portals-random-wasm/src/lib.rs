@@ -2,7 +2,7 @@
 //!
 //! Uses the Web Crypto API via `getrandom` crate with `wasm_js` feature.
 
-use rhi_portals_random::{InsecureRandom, SecureRandom};
+use portals_random::{InsecureRandom, SecureRandom};
 
 /// Cryptographically secure random using Web Crypto API.
 #[derive(Debug, Default, Clone, Copy)]

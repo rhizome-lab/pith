@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-clocks"
+name = "portals-clocks"
 description = "Clock interfaces (wall clock, monotonic clock)"
 version.workspace = true
 edition.workspace = true

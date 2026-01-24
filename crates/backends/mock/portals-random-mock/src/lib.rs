@@ -2,7 +2,7 @@
 //!
 //! Provides deterministic random number generators for reproducible tests.
 
-use rhi_portals_random::{InsecureRandom, SecureRandom};
+use portals_random::{InsecureRandom, SecureRandom};
 use std::cell::Cell;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;

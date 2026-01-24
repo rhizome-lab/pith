@@ -2,7 +2,7 @@
 //!
 //! Works on both native and WASM targets.
 
-use rhi_portals_encoding::{Base64, Base64Url, DecodeError, Hex, UrlEncoding};
+use portals_encoding::{Base64, Base64Url, DecodeError, Hex, UrlEncoding};
 
 /// Standard Base64 encoding.
 pub struct StdBase64;

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-filesystem-native"
+name = "portals-filesystem-native"
 description = "Native implementation of portals-filesystem"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-filesystem = { path = "../../../interfaces/portals-filesystem" }
-rhi-portals-io-native = { path = "../portals-io-native" }
+portals-filesystem = { path = "../../../interfaces/portals-filesystem" }
+portals-io-native = { path = "../portals-io-native" }

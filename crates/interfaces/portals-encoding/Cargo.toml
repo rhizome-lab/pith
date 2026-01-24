@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-encoding"
+name = "portals-encoding"
 description = "Encoding/decoding interfaces"
 version.workspace = true
 edition.workspace = true

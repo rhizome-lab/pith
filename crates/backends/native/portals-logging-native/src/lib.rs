@@ -1,6 +1,6 @@
 //! Native logging implementation using tracing.
 
-use rhi_portals_logging::{Level, Logger, Record};
+use portals_logging::{Level, Logger, Record};
 
 /// Initialize the default tracing subscriber.
 pub fn init() {

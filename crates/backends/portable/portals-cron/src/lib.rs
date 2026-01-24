@@ -2,7 +2,7 @@
 //!
 //! Works on both native and WASM targets.
 
-use rhi_portals_cron::{CronError, CronExpr, CronParser, CronSchedule};
+use portals_cron::{CronError, CronExpr, CronParser, CronSchedule};
 use std::fmt;
 
 /// A parsed cron expression.

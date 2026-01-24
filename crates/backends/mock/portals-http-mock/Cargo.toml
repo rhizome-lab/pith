@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-http-mock"
+name = "portals-http-mock"
 description = "Mock implementation of portals-http for testing"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-http = { path = "../../../interfaces/portals-http" }
+portals-http = { path = "../../../interfaces/portals-http" }
 
 [dev-dependencies]
 tokio = { workspace = true }

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-blobstore-native"
+name = "portals-blobstore-native"
 description = "Native blob storage implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-blobstore = { path = "../../../interfaces/portals-blobstore" }
+portals-blobstore = { path = "../../../interfaces/portals-blobstore" }
 tokio.workspace = true
 
 [dev-dependencies]

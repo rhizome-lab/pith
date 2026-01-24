@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-timezone"
+name = "portals-timezone"
 description = "Timezone handling"
 version.workspace = true
 edition.workspace = true

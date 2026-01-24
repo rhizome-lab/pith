@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-clocks-native"
+name = "portals-clocks-native"
 description = "Native implementation of portals-clocks"
 version.workspace = true
 edition.workspace = true
@@ -11,5 +11,5 @@ default = ["tokio"]
 tokio = ["dep:tokio"]
 
 [dependencies]
-rhi-portals-clocks = { path = "../../../interfaces/portals-clocks" }
+portals-clocks = { path = "../../../interfaces/portals-clocks" }
 tokio = { workspace = true, optional = true }

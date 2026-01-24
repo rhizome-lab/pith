@@ -1,6 +1,6 @@
 //! Native in-memory cache implementation.
 
-use rhi_portals_cache::{Cache, CacheEntry, CacheStats, CacheWithStats};
+use portals_cache::{Cache, CacheEntry, CacheStats, CacheWithStats};
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::RwLock;

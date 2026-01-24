@@ -7,7 +7,7 @@ use hickory_resolver::{
     name_server::TokioConnectionProvider,
     Resolver, TokioResolver,
 };
-use rhi_portals_dns::Error;
+use portals_dns::Error;
 
 /// Native DNS resolver.
 pub struct NativeResolver {
@@ -52,7 +52,7 @@ impl Default for NativeResolver {
     }
 }
 
-impl rhi_portals_dns::Resolver for NativeResolver {
+impl portals_dns::Resolver for NativeResolver {
     async fn lookup_ipv4(&self, host: &str) -> Result<Vec<Ipv4Addr>, Error> {
         let response = self
             .inner

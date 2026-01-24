@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-io"
+name = "portals-io"
 description = "I/O interfaces (streams, polling)"
 version.workspace = true
 edition.workspace = true

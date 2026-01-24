@@ -1,6 +1,6 @@
 //! Native implementation of portals-http using reqwest.
 
-use rhi_portals_http::{Error, HttpClient, Method, Request, Response};
+use portals_http::{Error, HttpClient, Method, Request, Response};
 
 /// HTTP client using reqwest.
 #[derive(Debug, Clone)]

@@ -1,6 +1,6 @@
 //! Native configuration implementation using environment variables.
 
-use rhi_portals_config::{Config, ConfigMut, Error};
+use portals_config::{Config, ConfigMut, Error};
 use std::collections::HashMap;
 use std::env;
 

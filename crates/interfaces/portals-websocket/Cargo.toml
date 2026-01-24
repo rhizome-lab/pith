@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-websocket"
+name = "portals-websocket"
 description = "WebSocket interfaces"
 version.workspace = true
 edition.workspace = true

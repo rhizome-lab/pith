@@ -1,6 +1,6 @@
 //! Native implementation of portals-sql using libsql.
 
-use rhi_portals_sql::{Connection, Error, Row, Value};
+use portals_sql::{Connection, Error, Row, Value};
 
 /// A SQLite connection backed by libsql.
 ///

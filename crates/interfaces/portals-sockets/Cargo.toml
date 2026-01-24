@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-sockets"
+name = "portals-sockets"
 description = "Socket interfaces (TCP, UDP)"
 version.workspace = true
 edition.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-crypto"
+name = "portals-crypto"
 description = "Cryptographic interfaces"
 version.workspace = true
 edition.workspace = true

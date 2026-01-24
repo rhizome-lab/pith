@@ -3,7 +3,7 @@
 //! Provides `MemoryMessaging` for creating channels and topics,
 //! with implementations of the `Channel`, `Topic`, and related traits.
 
-use rhi_portals_messaging::{Channel, Error, Message, Receiver, Sender, Subscriber, Topic};
+use portals_messaging::{Channel, Error, Message, Receiver, Sender, Subscriber, Topic};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use std::time::Duration;

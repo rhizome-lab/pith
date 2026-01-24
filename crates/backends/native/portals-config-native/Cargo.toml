@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-config-native"
+name = "portals-config-native"
 description = "Native configuration implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-config = { path = "../../../interfaces/portals-config" }
+portals-config = { path = "../../../interfaces/portals-config" }

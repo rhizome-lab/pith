@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-snowflake-native"
+name = "portals-snowflake-native"
 description = "Native snowflake ID implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-snowflake = { path = "../../../interfaces/portals-snowflake" }
+portals-snowflake = { path = "../../../interfaces/portals-snowflake" }

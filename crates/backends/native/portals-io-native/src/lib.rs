@@ -1,6 +1,6 @@
 //! Native implementation of portals-io.
 
-use rhi_portals_io::{InputStream, OutputStream, Pollable, Seek, SeekFrom, StreamError};
+use portals_io::{InputStream, OutputStream, Pollable, Seek, SeekFrom, StreamError};
 use std::io::{Read, Write};
 
 /// An input stream wrapping any `std::io::Read`.

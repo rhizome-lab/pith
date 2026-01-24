@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-messaging"
+name = "portals-messaging"
 description = "Message queue interfaces"
 version.workspace = true
 edition.workspace = true

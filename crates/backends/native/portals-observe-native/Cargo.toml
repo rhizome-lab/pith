@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-observe-native"
+name = "portals-observe-native"
 description = "Native observability implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-observe = { path = "../../../interfaces/portals-observe" }
+portals-observe = { path = "../../../interfaces/portals-observe" }

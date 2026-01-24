@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-blobstore"
+name = "portals-blobstore"
 description = "Blob storage interfaces"
 version.workspace = true
 edition.workspace = true

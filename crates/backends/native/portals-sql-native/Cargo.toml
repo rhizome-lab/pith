@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-sql-native"
+name = "portals-sql-native"
 description = "Native implementation of portals-sql using libsql"
 version.workspace = true
 edition.workspace = true
@@ -7,6 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-sql = { path = "../../../interfaces/portals-sql" }
+portals-sql = { path = "../../../interfaces/portals-sql" }
 libsql.workspace = true
 tokio = { workspace = true }

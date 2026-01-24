@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-keyvalue-native"
+name = "portals-keyvalue-native"
 description = "Native key-value store implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-keyvalue = { path = "../../../interfaces/portals-keyvalue" }
+portals-keyvalue = { path = "../../../interfaces/portals-keyvalue" }
 tokio.workspace = true

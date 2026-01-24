@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-http-wasm"
+name = "portals-http-wasm"
 description = "WASM implementation of portals-http"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-http = { path = "../../../interfaces/portals-http" }
+portals-http = { path = "../../../interfaces/portals-http" }
 gloo-net = { version = "0.6", features = ["http"] }
 wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-random-native"
+name = "portals-random-native"
 description = "Native implementation of portals-random"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-random = { path = "../../../interfaces/portals-random" }
+portals-random = { path = "../../../interfaces/portals-random" }
 getrandom.workspace = true

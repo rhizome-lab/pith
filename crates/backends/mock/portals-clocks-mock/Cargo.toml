@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-clocks-mock"
+name = "portals-clocks-mock"
 description = "Mock implementation of portals-clocks for testing"
 version.workspace = true
 edition.workspace = true
@@ -7,4 +7,4 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-clocks = { path = "../../../interfaces/portals-clocks" }
+portals-clocks = { path = "../../../interfaces/portals-clocks" }

@@ -3,7 +3,7 @@
 //! Provides no-op implementations for when telemetry is not needed,
 //! plus simple in-memory implementations for testing.
 
-use rhi_portals_observe::{Counter, Gauge, Histogram, Metrics, Span, Tracer};
+use portals_observe::{Counter, Gauge, Histogram, Metrics, Span, Tracer};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::{Arc, RwLock};
 

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-websocket-native"
+name = "portals-websocket-native"
 description = "Native WebSocket implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-websocket = { path = "../../../interfaces/portals-websocket" }
+portals-websocket = { path = "../../../interfaces/portals-websocket" }
 tokio-tungstenite = "0.26"
 tokio.workspace = true
 futures-util = "0.3"

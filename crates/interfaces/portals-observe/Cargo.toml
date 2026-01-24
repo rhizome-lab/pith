@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-observe"
+name = "portals-observe"
 description = "Observability/telemetry interfaces"
 version.workspace = true
 edition.workspace = true

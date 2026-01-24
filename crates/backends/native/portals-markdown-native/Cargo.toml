@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-markdown-native"
+name = "portals-markdown-native"
 description = "Native Markdown implementation using pulldown-cmark"
 version.workspace = true
 edition.workspace = true
@@ -7,5 +7,5 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-markdown = { path = "../../../interfaces/portals-markdown" }
+portals-markdown = { path = "../../../interfaces/portals-markdown" }
 pulldown-cmark = "0.12"

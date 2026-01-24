@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-sql"
+name = "portals-sql"
 description = "SQL database interfaces"
 version.workspace = true
 edition.workspace = true

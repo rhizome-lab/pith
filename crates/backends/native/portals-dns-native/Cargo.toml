@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-dns-native"
+name = "portals-dns-native"
 description = "Native DNS implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,6 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-dns = { path = "../../../interfaces/portals-dns" }
+portals-dns = { path = "../../../interfaces/portals-dns" }
 hickory-resolver = "0.25"
 tokio.workspace = true

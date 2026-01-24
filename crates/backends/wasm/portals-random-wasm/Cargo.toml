@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-random-wasm"
+name = "portals-random-wasm"
 description = "WASM implementation of portals-random"
 version.workspace = true
 edition.workspace = true
@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-random = { path = "../../../interfaces/portals-random" }
+portals-random = { path = "../../../interfaces/portals-random" }
 getrandom = { version = "0.3", features = ["wasm_js"] }
 
 [dev-dependencies]

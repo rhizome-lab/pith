@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-http1"
+name = "portals-http1"
 description = "HTTP/1.1 protocol implementation"
 version.workspace = true
 edition.workspace = true

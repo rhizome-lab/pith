@@ -1,6 +1,6 @@
 //! Native implementation of portals-random.
 
-use rhi_portals_random::{InsecureRandom, SecureRandom};
+use portals_random::{InsecureRandom, SecureRandom};
 
 /// Cryptographically secure random using OS entropy.
 #[derive(Debug, Default, Clone, Copy)]

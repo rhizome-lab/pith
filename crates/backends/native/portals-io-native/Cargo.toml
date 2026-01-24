@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-io-native"
+name = "portals-io-native"
 description = "Native implementation of portals-io"
 version.workspace = true
 edition.workspace = true
@@ -11,5 +11,5 @@ default = ["tokio"]
 tokio = ["dep:tokio"]
 
 [dependencies]
-rhi-portals-io = { path = "../../../interfaces/portals-io" }
+portals-io = { path = "../../../interfaces/portals-io" }
 tokio = { workspace = true, features = ["io-util"], optional = true }

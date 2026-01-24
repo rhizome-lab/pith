@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-markdown"
+name = "portals-markdown"
 description = "Markdown interfaces"
 version.workspace = true
 edition.workspace = true

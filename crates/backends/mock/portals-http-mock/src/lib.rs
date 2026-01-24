@@ -2,7 +2,7 @@
 //!
 //! Provides a mock HTTP client that returns canned responses and records requests.
 
-use rhi_portals_http::{Error, HttpClient, Method, Request, Response};
+use portals_http::{Error, HttpClient, Method, Request, Response};
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-snowflake"
+name = "portals-snowflake"
 description = "Snowflake ID interfaces"
 version.workspace = true
 edition.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "rhi-portals-logging-native"
+name = "portals-logging-native"
 description = "Native logging implementation"
 version.workspace = true
 edition.workspace = true
@@ -7,6 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-rhi-portals-logging = { path = "../../../interfaces/portals-logging" }
+portals-logging = { path = "../../../interfaces/portals-logging" }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
